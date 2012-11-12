@@ -1,0 +1,117 @@
+// This file contains the locations of the "placement" objects in // each level.  The placement objects are objects that represent // where the user can or cant place the windfarms.
+// Also in this file are the reason for rejecting a placement.
+//
+//Finally, there are different shapes you can make for the 
+// placement objects: 
+// 0 = rectangle, 1 = circile
+//
+// USAGE:
+// number of levels
+
+// //level 1---------
+// number of resons for rejecting
+// (String) rejection reason 1
+// ... more reasons
+
+// number of Shapes
+// Shape 1------
+// shape number (circle? rectangle?)
+// shape rejection reason index
+// (float)The shape's indication object's height
+// (float)shape's center's x
+// (float)shape's center's z
+// (float)shape's height
+// //if shape is circle
+// (float)shape diameter
+// //if shape is rectangle
+// (float) shape x length
+// (float) shape z length
+// (float) shape rotation around Y
+
+// ...more shapes
+
+// //level 2----------
+// ...
+//
+
+
+
+
+//-----------------------------------------START
+
+//level count
+1
+
+//------------------------------------------LEVEL 1
+//rejection reason count
+3
+
+
+//rejection reason
+This area is too++
+populated, people++
+won't like us++
+building so close!
+//
+This area is a++
+favorite of the++
+local hiking and++
+cycling club, we++
+cant build here.
+//
+win
+
+//shape count
+3
+
+
+//shape #1, square
+0
+//shape rejection index
+0
+//indicator height
+15
+//center x
+-3567
+//center z
+396
+//height
+-50.0
+//x length
+900.0
+//z length
+900.0
+//rotation
+0.0
+
+
+//shape #2, circle
+1
+//shape rejection index
+1
+//indicator height
+100
+//center x
+500
+//center z
+500
+//Height
+-50.0
+//diameter
+800.0
+
+
+//shape #3, circle WIN
+1
+//rej index
+2
+//indicator height
+15
+//center x 
+3164
+//center z 
+-3678
+//height
+-50
+//diameter
+600

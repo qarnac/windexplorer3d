@@ -1,0 +1,88 @@
+// Use this format:
+//
+// Number Of Levels with opening/exiting scenes
+//
+// ---First Scenes---
+// number of pages (int only)
+// page name
+// ...
+// page view time(floats ok)
+// ...
+//
+// ---Second Scenes---
+// ...
+
+//REMEMBER: to add a final var in the LevelIntroManager for the index of your scene.
+
+//---------------------------start
+//---------------------------start
+
+//number of levels
+3
+
+//Level 1 INTRO------------------------
+
+//first level intro number of pages
+12
+
+//assets
+Textures/Scenes/Level_1/intro/level1intro1_1.png
+Textures/Scenes/Level_1/intro/level1intro1_2.png
+
+Textures/Scenes/Level_1/intro/level1intro2_1.png
+Textures/Scenes/Level_1/intro/level1intro2_2.png
+Textures/Scenes/Level_1/intro/level1intro2_1.png
+Textures/Scenes/Level_1/intro/level1intro2_2.png
+Textures/Scenes/Level_1/intro/level1intro2_1.png
+
+Textures/Scenes/Level_1/intro/level1intro3_1.png
+Textures/Scenes/Level_1/intro/level1intro3_2.png
+
+Textures/Scenes/Level_1/intro/level1intro4_1.png
+Textures/Scenes/Level_1/intro/level1intro4_2.png
+
+Textures/Scenes/Level_1/intro/level1intro5_1.png
+
+//view times-----
+//welcome text
+3
+1.0
+//light switch and finger
+0.8
+0.5
+0.8
+0.5
+1.0
+//scared face
+3
+6
+
+//turbines
+4
+8
+
+13
+
+
+
+//Level 1 LOSE------------------------
+
+//First level's endtro LOSE number of pages
+1
+
+//assets
+Textures/Scenes/Level_1/gameover.jpg
+
+//view time
+4
+
+//Level 1 WIN-------------------------
+
+//First level's win number of pages
+1
+
+//assets
+Textures/Scenes/Level_1/win.jpg
+
+//view time
+5

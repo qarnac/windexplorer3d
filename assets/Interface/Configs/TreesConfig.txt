@@ -1,0 +1,61 @@
+//This file describes where in each level the tree billboards are located at.
+
+// To use:
+//------------------------------------------------------------------------------
+
+//(short)number of tree images to use
+
+//list all relative path (from /assats/) to the image to use for trees.
+//   note: the order you put in model paths is that images's index for future use.
+
+//list all tree images default sizes, in the same order as above.  
+//    Use two floats for this, x and y.
+
+//(short)number of levels
+
+////Level 1-------
+//(int)number of trees in this level.
+////Tree 1-----
+//(short)index of this trees image
+//(float)x
+//(float)y
+//(float)z
+//(float)scale
+
+//repeate for more trees...
+
+//repeate for more levels...
+
+//------------------------------------------------------------------------------
+
+//number of tree models
+1
+
+//listing model paths
+Textures/trees/tree.png
+
+//default size x
+500
+
+//default size y
+500
+
+//number of levels
+1
+
+//level 1--------------
+
+//number of trees
+1
+
+//tree 1---------
+//image index
+0
+//x
+0
+//y
+0
+//z
+300
+//scale
+1.0

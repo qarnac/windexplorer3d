@@ -1,0 +1,36 @@
+// DO NOT RENAME OR MOVE THIS FILE!!!
+//
+// Current File format expected:
+//
+// Camera Physics config file name
+// Intro Level Screens Config File Name.
+// Skybox path
+// terrain splatter texture path
+// terrain height map path
+// terrain grass texture path
+// terrain dirt texture path
+// terrain road texture path
+// cockpit gui path
+//---------------------------------------------------------------START
+// Camera config name
+CameraConfig.txt
+//
+// Intro config name
+IntroScreensConfig.txt
+//
+// Rejection shapes config name
+PlacementRejectionConfig.txt
+//
+// Tree model's config name
+TreesConfig.txt
+//
+//
+Textures/sky/sky.dds
+//
+Textures/terrain/debugLevel/alphamap.png
+Textures/terrain/debugLevel/heightmap.png
+Textures/terrain/debugLevel/grass.jpg
+Textures/terrain/debugLevel/dirt.jpg
+Textures/terrain/debugLevel/road.jpg
+//
+Textures/Cockpit.png

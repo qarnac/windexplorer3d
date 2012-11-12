@@ -1,0 +1,15 @@
+#JME3 Default Files#
+#######################
+*.so
+*.MF
+*.jnlp
+/build.xml
+.*~
+
+#Defualt Folders
+/build
+/dist
+/nbproject
+
+#TEMP assets folder
+/assets/TEMP

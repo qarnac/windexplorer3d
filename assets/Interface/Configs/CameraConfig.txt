@@ -1,0 +1,63 @@
+//        CURRENT CONFIG FILE FORMAT:
+//        number of prifiles
+//        //
+//        float maxVelocity
+//        int impulseXZ
+//        int impulseY
+//        float frictionX
+//        float frictionY
+//        float frictionZ
+//        float frictionYRotation;
+//        float rotationYImpulse
+//        float rotationYVelocityMax
+//        int mass
+//--------------------------
+//--------------------------
+//--------------------------
+2
+//--------------------------
+//helicopter cam
+//--------------------------
+//max Velocity
+5
+//impulse in XZ plane
+5
+//impuse Y plane
+3
+//friction X
+1.5
+//friction Y
+1.2
+//friction Z
+1.5
+//Rotation friction Y
+3
+//Rotation Impulse Y
+.05
+//Rotation Velocity Max Y
+.08
+//Mass
+100
+//-----------------------
+//walking cam
+//-----------------------
+//max Velocity
+1.8
+//impulse in XZ plane
+4
+//impuse Y plane
+0
+//friction X
+10
+//friction Y
+10
+//friction Z
+10
+//Rotation friction Y
+15
+//Rotation Impulse Y
+.15
+//Rotation Velocity Max Y
+.08
+//Mass
+100
