@@ -16,6 +16,10 @@ import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 /**
  *
  * @author Ryan
+ * ************
+ * Causey Comments:
+ * MainMenu is essentially a wrapper class for the Nifty GUI class used here
+ * to build the main menu for the game.
  */
 
 public class MainMenu {
@@ -67,6 +71,13 @@ public class MainMenu {
         //final Main thisHandle = this;
         //This adds a screen and a controller to nifty,
         //The controller is in this package.
+        /**********************************************
+         * Causey Comments:
+         * MainMenuController is instantiated in the addScreen function and is
+         * passed as a parameter. This makes MainMenuController the controller
+         * class for this nifty instance, ergo the controller for this MainMenu
+         * instance. 
+         */
         nifty.addScreen("screen_mainMenu", new ScreenBuilder("screen"){{
                         controller(new mygame.MainMenuController(mainHandle));
 
@@ -101,6 +112,7 @@ public class MainMenu {
                         height("5%");
                         width("15%");
                         visibleToMouse(true);
+                        //Causey: startGame() is a function defined in the controller
                         interactOnClick("startGame()");
                     }});
                     
@@ -111,6 +123,7 @@ public class MainMenu {
                         height("5%");
                         width("15%");
                         visibleToMouse(true);
+                        //Causey: quit() is a function defined in the controller
                         interactOnClick("quit()");
                     }});
                     

@@ -60,6 +60,11 @@ public class MainMenuController extends AbstractAppState implements ScreenContro
     //-------------------------------------------------------------------------- 
     
     //called from the gui
+    /*
+     * Causey comments:
+     * called when the Start button gets clicked on by the user within the 
+     * start menu GUI.
+     */
     public void startGame() {
         callingHandle.soundsManager.setPlaying(callingHandle.soundsManager.BUTTON_PRESS_INDEX, true);
         try {
@@ -67,10 +72,15 @@ public class MainMenuController extends AbstractAppState implements ScreenContro
         } catch (InterruptedException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        callingHandle.mainMenuStartGame();
+        callingHandle.mainMenuStartGame(); //Causey: call this function from main
     }
     
     //called from the gui
+    /*
+     * Causey comments:
+     * called when the quit button gets clicked on by the user within the 
+     * start menu GUI.
+     */
     public void quit(){
         callingHandle.soundsManager.setPlaying(callingHandle.soundsManager.BUTTON_PRESS_INDEX, true);
         try {
@@ -78,7 +88,7 @@ public class MainMenuController extends AbstractAppState implements ScreenContro
         } catch (InterruptedException ex) {
             Logger.getLogger(MainMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        callingHandle.mainMenuStopProgram();
+        callingHandle.mainMenuStopProgram(); //Causey: call this function from main
     }
     
     
