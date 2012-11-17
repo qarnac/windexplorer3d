@@ -46,7 +46,7 @@ public class SoundsManager {
         
         
     public final short LEVEL_ONE_WIN_INDEX = 4;
-                public final String LEVEL_ONE_WIN_PATH = "Sounds/level_one_win.wav";
+        public final String LEVEL_ONE_WIN_PATH = "Sounds/level_one_win.wav";
         public final float LEVEL_ONE_WIN_DEFAULT_VOLUME = (float).2; 
         
         
@@ -55,21 +55,20 @@ public class SoundsManager {
     //--------------------------------------------------------------------------
     //contains the assets for every sound.
     private AudioNode[] _audioNodes;
-         
-    //AudioNode music;
-    private Main mainHandle;
+    
     private AssetManager assetMan;
     private Node guiNode;
-        //private Node musicNode;
+    private DebugGlobals debuggingGlobals;
+
     
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
     
-    public SoundsManager(Main mainHandle){
-        this.mainHandle = mainHandle;
-        assetMan = mainHandle.getAssetManager();
-        guiNode = mainHandle.getGuiNode();
+    public SoundsManager(DataSoundManager incomingData){
+        assetMan = incomingData.assetMan;
+        guiNode = incomingData.GUINode;
+        debuggingGlobals = incomingData.debugGlobalsObj;
         
         _audioNodes = new AudioNode[NUMBER_OF_AUDIO_NODES];
         
@@ -168,17 +167,20 @@ public class SoundsManager {
     //returns 0 for "a-ok", 1 for "fuuuuuuuuuuu..."
     public byte setPlaying(short index, boolean playing){
         //turns the sound off for debugging.
-        if(!mainHandle.DEBUG_SOUND_OFF){
+        if(!debuggingGlobals.DEBUG_SOUND_OFF){
             //make sure you arn't stustustupid or something.
             if(_audioNodes[index] != null){
-                if(playing)
+                if(playing) {
                     _audioNodes[index].play();
-                else
+                }
+                else {
                     _audioNodes[index].pause();
+                }
                 return 0;
             }//if
-            else
+            else {
                 return 1;
+            }
         }//if
         return 0;
     }//method

@@ -9,16 +9,11 @@ package mygame;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
-import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
-import com.jme3.terrain.geomipmap.TerrainQuad;
-import com.jme3.texture.Texture;
 
 
 public class Main extends SimpleApplication {
@@ -132,11 +127,13 @@ public class Main extends SimpleApplication {
 
     //Used for debugging, remember to change these before release!
     public final boolean DEBUG_INTRO_OFF = true;
-    public final boolean DEBUG_SOUND_OFF = false;
+    //public final boolean DEBUG_SOUND_OFF = false;
     public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = false;
     public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
     public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
     public final boolean DEBUG_SHOW_COCKPIT = true;
+    
+    private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
 
     
     //--------------------------------------------------------------------------
@@ -203,7 +200,11 @@ public class Main extends SimpleApplication {
     public void preloadGameVars(){
         //for playing all kinds of sounds, 
         //in game and out of game.
-        soundsManager = new SoundsManager(this);
+        DataSoundManager soundData = new DataSoundManager();
+        soundData.GUINode = this.getGuiNode();
+        soundData.assetMan = this.getAssetManager();
+        soundData.debugGlobalsObj = this.DEBUG_GLOBALS_OBJ;
+        soundsManager = new SoundsManager(soundData);
         
         //init config file reader---------
         confReader = new ConfigReader();
