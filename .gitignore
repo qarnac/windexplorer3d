@@ -13,3 +13,10 @@
 
 #TEMP assets folder
 /assets/TEMP
+
+#Other Filetypes
+*.vsd
+*.pdf
+*.jpg
+*.dll
+*.~vsd
