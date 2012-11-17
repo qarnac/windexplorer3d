@@ -399,6 +399,13 @@ public class Main extends SimpleApplication {
     //--------------------------------------------------------------------------
     //THESE GET CALLED FROM THE MAIN MENU CONTROLLER----------------------------
     //--------------------------------------------------------------------------
+    /*
+     * Causey Comments:
+     * Why are these defined here instead of in the MainMenuController? Since
+     * a handle to Main is passed to MainMenuController, as I understand it,
+     * MainMenuController should be able to have this function internalized 
+     * within itself. I could be totally wrong of course.
+     */
     
     //Gets called from the main menu controller,
     //which handles gui interactions.
