@@ -1,22 +1,13 @@
-#JME3 Default Files#
+#Ignore Everything!!!!#
 #######################
-*.so
-*.MF
-*.jnlp
-/build.xml
-.*~
 
-#Defualt Folders
-/build
-/dist
-/nbproject
+*
 
-#TEMP assets folder
-/assets/TEMP
+#Except the src and assets directories#
+#and everything in them		      #
+#######################################
 
-#Other Filetypes
-*.vsd
-*.pdf
-*.jpg
-*.dll
-*.~vsd
+!src/*
+!/src/
+!assets/*
+!/assets/
