@@ -7,7 +7,7 @@
 #and everything in them		      #
 #######################################
 
-!src/*
 !/src/
-!assets/*
+!src/*
 !/assets/
+!assets/*
