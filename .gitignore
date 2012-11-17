@@ -1,9 +1,12 @@
-#Ignore Everything!!!!#
-#######################
+#Ignore everything unless stated otherwise#
+###########################################
+/*
+/*/
 
-*
 
-#The sub directories /src and /assets
-#have their own .gitignore files
-#that undo the ignore everything in this
-#file.
+
+#Dont Ignore these directories and        #
+#Sub-Directories                          #
+###########################################
+!/src/
+!/assets/
