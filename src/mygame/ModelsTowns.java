@@ -21,7 +21,6 @@ public class ModelsTowns {
     //--------------------------------------------------------------------------
     //VARS----------------------------------------------------------------------
     //--------------------------------------------------------------------------
-        private Main mainHandle;
         private AssetManager assetManager;
         //This is the master model for the town model.
         //Gets cloned for every visible model.
@@ -30,9 +29,11 @@ public class ModelsTowns {
         private Spatial[] _townSpatials;
             //visible models rotation quats.
             private Quaternion[] _townQuats;
-        //all models attach here.
-        public Node townsModelNode;
+        Node rootNode;
+            //all models attach here.
+            public Node townsModelNode;
         
+        DebugGlobals globalFlags;
         //----------------------------------------------------------------------
         //This is where you define the towns------------------------------------
         //----------------------------------------------------------------------
@@ -61,13 +62,14 @@ public class ModelsTowns {
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
         
-    public ModelsTowns(Main mainHandle){
-        this.mainHandle = mainHandle;
-        assetManager = mainHandle.getAssetManager();
+    public ModelsTowns(DataModelsTowns dataObj){
+        assetManager = dataObj.assetManager;
         townMasterSpatial = null;
         _townSpatials = null;
         _townQuats = null;
+        rootNode = dataObj.rootNode;
         townsModelNode = new Node();
+        globalFlags = dataObj.globalFlags;
     }//method
     
     //--------------------------------------------------------------------------
@@ -83,44 +85,29 @@ public class ModelsTowns {
     //--------------------------------------------------------------------------
     
     public void showLevel1Towns(){
-        _townSpatials = new Spatial[_LEVEL_1_TOWN_LOCATIONS.length];
-        _townQuats = new Quaternion[_LEVEL_1_TOWN_LOCATIONS.length];
-        
-        for(short i = 0; i < _LEVEL_1_TOWN_LOCATIONS.length; ++i){
-            _townSpatials[i] = townMasterSpatial.clone();
-            _townSpatials[i].setLocalTranslation(_LEVEL_1_TOWN_LOCATIONS[i]);
-            
-            _townQuats[i] = new Quaternion();
-            _townQuats[i].fromAngleAxis(_LEVEL_1_TOWN_ROTATIONS[i], Vector3f.UNIT_Y);
-            _townSpatials[i].setLocalRotation(_townQuats[i]);
+        if(globalFlags.DEBUG_TOWN_MODELS_VISIBLE){
+            _townSpatials = new Spatial[_LEVEL_1_TOWN_LOCATIONS.length];
+            _townQuats = new Quaternion[_LEVEL_1_TOWN_LOCATIONS.length];
 
-            _townSpatials[i].setLocalScale(LEVEL_1_TOWN_SCALE);
-            mainHandle.getRootNode().attachChild(_townSpatials[i]);
-        }//for
-        /*
-        //Do this if using a 
-        //assetManager.registerLocator("town.zip", ZipLocator.class);
-        //Spatial gameLevel = assetManager.loadModel("main.scene");
-        //Do this if going to extract zip files
-        Spatial gameLevel = assetManager.loadModel("Models/town/main.j3o");
-        gameLevel.setLocalTranslation(-1770, -1f, -2597);
-        quat = new Quaternion();
-        float rotation = 90;
-        quat.fromAngleAxis(rotation, Vector3f.UNIT_Y);
-        gameLevel.setLocalRotation(quat);
-        
-        gameLevel.setLocalScale(4);
-        mainHandle.getRootNode().attachChild(gameLevel);
-         * 
-         */
-        
-        
-    }
+            for(short i = 0; i < _LEVEL_1_TOWN_LOCATIONS.length; ++i){
+                _townSpatials[i] = townMasterSpatial.clone();
+                _townSpatials[i].setLocalTranslation(_LEVEL_1_TOWN_LOCATIONS[i]);
+
+                _townQuats[i] = new Quaternion();
+                _townQuats[i].fromAngleAxis(_LEVEL_1_TOWN_ROTATIONS[i], Vector3f.UNIT_Y);
+                _townSpatials[i].setLocalRotation(_townQuats[i]);
+
+                _townSpatials[i].setLocalScale(LEVEL_1_TOWN_SCALE);
+                rootNode.attachChild(_townSpatials[i]);
+            }//for
+        }//if
+    }//method
     
     //--------------------------------------------------------------------------
     
     public void setTownLocation(short index, Vector3f location){
-        _townSpatials[index].setLocalTranslation(location);
+        if(index < _townSpatials.length)
+            _townSpatials[index].setLocalTranslation(location);
     }
     
     //--------------------------------------------------------------------------

@@ -124,16 +124,13 @@ public class Main extends SimpleApplication {
     public final DataLevelOneGeneral dataLevel1General = new DataLevelOneGeneral();
     
     //--------------------------------------------------------------------------
-
-    //Used for debugging, remember to change these before release!
+    
+    //This is slowly replacing the debug flags below...
+    private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
+    
     public final boolean DEBUG_INTRO_OFF = true;
-    //public final boolean DEBUG_SOUND_OFF = false;
-    //public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = false;
-    //public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
     public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
     public final boolean DEBUG_SHOW_COCKPIT = true;
-    
-    private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
 
     
     //--------------------------------------------------------------------------
@@ -240,16 +237,20 @@ public class Main extends SimpleApplication {
         
         //This manages the shapes that represent reasons
         //not to place a wind farm somewhere in a level.
-        DataWindFarmPlacementChecker data = new DataWindFarmPlacementChecker();
-        data.assetMan = this.getAssetManager();
-        data.rootNode = this.getRootNode();
-        data.debugGlobals = this.DEBUG_GLOBALS_OBJ;
-        data.configReader = this.confReader;
-        data.gameCam = this.getCamera();
-        windFarmPlacementChecker = new WindFarmPlacementChecker(data);
+        DataWindFarmPlacementChecker WFPCdata = new DataWindFarmPlacementChecker();
+        WFPCdata.assetMan = this.getAssetManager();
+        WFPCdata.rootNode = this.getRootNode();
+        WFPCdata.debugGlobals = this.DEBUG_GLOBALS_OBJ;
+        WFPCdata.configReader = this.confReader;
+        WFPCdata.gameCam = this.getCamera();
+        windFarmPlacementChecker = new WindFarmPlacementChecker(WFPCdata);
         
         //Load the town model's assets.
-        townsManager = new ModelsTowns(this);
+        DataModelsTowns townData = new DataModelsTowns();
+        townData.assetManager = this.getAssetManager();
+        townData.rootNode = this.getRootNode();
+        townData.globalFlags = this.DEBUG_GLOBALS_OBJ;
+        townsManager = new ModelsTowns(townData);
         townsManager.loadTownAssets();
         
         //Manages the 2d "scenes" in the game engine.
