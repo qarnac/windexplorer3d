@@ -15,6 +15,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial.CullHint;
@@ -25,22 +26,24 @@ import com.jme3.texture.Texture;
 public class WindFarmPlacementChecker {
     
     //--------------------------------------------------------------------------
-    public Main mainHandle;
-        private AssetManager mainAssetManager;//from mainHandle
-        private Node mainRootNode;//from mainHandle
-            //Holds all shapes, put into rootNode.
-            public Node placementShapesMasterNode;
-            //Holds all "indicators" (like smoke) for
-            //all shapes, put into rootNode.
-            public Node placementIndicatorMasterNode;
-                //indevidual nodes for each "indicator",
-                //smoke in this case.
-                public Node _EffectEmitterIndividualNodes[];
+    ConfigReader confReader;
+    private Camera gameCamera;
+    private AssetManager mainAssetManager;//from mainHandle
+    private Node mainRootNode;//from mainHandle
+        //Holds all shapes, put into rootNode.
+        public Node placementShapesMasterNode;
+        //Holds all "indicators" (like smoke) for
+        //all shapes, put into rootNode.
+        public Node placementIndicatorMasterNode;
+            //indevidual nodes for each "indicator",
+            //smoke in this case.
+            public Node _EffectEmitterIndividualNodes[];
     
     //current level everything is loaded for.
     private short currentLevel;
         //all relavent data for currentLevel.
         private DataPlacementLevelShapes levelDataObj;
+        private DebugGlobals debugGlobalsObj;
     
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
@@ -49,10 +52,13 @@ public class WindFarmPlacementChecker {
      * 
      * @param mainHandle handle to main class.
      */
-    public WindFarmPlacementChecker(Main mainHandle){
-        this.mainHandle = mainHandle;
-            mainAssetManager = mainHandle.getAssetManager();
-            mainRootNode = mainHandle.getRootNode();
+    public WindFarmPlacementChecker(DataWindFarmPlacementChecker dataObj){
+        //this.mainHandle = mainHandle;
+        mainAssetManager = dataObj.assetMan;
+        mainRootNode = dataObj.rootNode;
+        debugGlobalsObj = dataObj.debugGlobals;
+        gameCamera = dataObj.gameCam;
+        confReader = dataObj.configReader;
     }
     
     //--------------------------------------------------------------------------
@@ -69,7 +75,7 @@ public class WindFarmPlacementChecker {
         //Make these invisible shapes by default.
         placementShapesMasterNode.setCullHint(CullHint.Always);
         //Unless we are debugging...
-        if(mainHandle.DEBUG_PLACEMENT_SHAPES_VISIBLE)
+        if(debugGlobalsObj.DEBUG_PLACEMENT_SHAPES_VISIBLE)
             placementShapesMasterNode.setCullHint(CullHint.Never);
         
         //add our node to the main node
@@ -77,7 +83,7 @@ public class WindFarmPlacementChecker {
         
         currentLevel = level;
         
-        levelDataObj = mainHandle.confReader.getPlacementLevelData(currentLevel);
+        levelDataObj = confReader.getPlacementLevelData(currentLevel);
         Geometry geom;
         
         //-----------------------------
@@ -113,9 +119,9 @@ public class WindFarmPlacementChecker {
             
             
             //debug, make shape visible
-            if(mainHandle.DEBUG_PLACEMENT_SHAPES_VISIBLE){
+            if(debugGlobalsObj.DEBUG_PLACEMENT_SHAPES_VISIBLE){
                 //default material to make the shape visible
-                Material mat_stl = new Material(mainHandle.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+                Material mat_stl = new Material(mainAssetManager, "Common/MatDefs/Misc/Unshaded.j3md");
                 Texture tex_ml = mainAssetManager.loadTexture("Textures/HelicopterBlades.png");
                 mat_stl.setTexture("ColorMap", tex_ml);
                 geom.setMaterial(mat_stl);
@@ -136,7 +142,7 @@ public class WindFarmPlacementChecker {
      * CALL THIS AFTER loadShapes() !!!!!
      */
     public void loadSmokeOnAllObjects(){
-        if(mainHandle.DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE){
+        if(debugGlobalsObj.DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE){
             _EffectEmitterIndividualNodes = new Node[levelDataObj._shapesInThisLevel.length];
             for(int i = 0; i < levelDataObj._shapesInThisLevel.length; ++i){
                 _EffectEmitterIndividualNodes[i] = new Node();
@@ -179,7 +185,7 @@ public class WindFarmPlacementChecker {
     public CollisionResults getPlacementResult(){
         CollisionResults results = new CollisionResults();
         // 2. Aim the ray from cam loc to cam direction.
-        Ray ray = new Ray(mainHandle.getCamera().getLocation(), new Vector3f(0,-1,0));
+        Ray ray = new Ray(gameCamera.getLocation(), new Vector3f(0,-1,0));
         // 3. Collect intersections between Ray and Shootables in results list.
         placementShapesMasterNode.collideWith(ray, results);
         return results;

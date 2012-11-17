@@ -128,8 +128,8 @@ public class Main extends SimpleApplication {
     //Used for debugging, remember to change these before release!
     public final boolean DEBUG_INTRO_OFF = true;
     //public final boolean DEBUG_SOUND_OFF = false;
-    public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = false;
-    public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
+    //public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = false;
+    //public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
     public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
     public final boolean DEBUG_SHOW_COCKPIT = true;
     
@@ -149,7 +149,7 @@ public class Main extends SimpleApplication {
         //Bool describing game state,
         //main menu comes first.
         gamePlaying = false;
-        currentLevel = -1; //for nothings loaded
+        currentLevel = -1; //for nothing is loaded
         
         //dont use use default camera controls
         flyCam.setEnabled(false);
@@ -240,7 +240,13 @@ public class Main extends SimpleApplication {
         
         //This manages the shapes that represent reasons
         //not to place a wind farm somewhere in a level.
-        windFarmPlacementChecker = new WindFarmPlacementChecker(this);
+        DataWindFarmPlacementChecker data = new DataWindFarmPlacementChecker();
+        data.assetMan = this.getAssetManager();
+        data.rootNode = this.getRootNode();
+        data.debugGlobals = this.DEBUG_GLOBALS_OBJ;
+        data.configReader = this.confReader;
+        data.gameCam = this.getCamera();
+        windFarmPlacementChecker = new WindFarmPlacementChecker(data);
         
         //Load the town model's assets.
         townsManager = new ModelsTowns(this);

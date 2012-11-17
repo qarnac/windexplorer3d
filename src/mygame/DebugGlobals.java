@@ -11,6 +11,6 @@ package mygame;
 public class DebugGlobals {
     
     public final boolean DEBUG_SOUND_OFF = false;
-    
-    
+    public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = false;
+    public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
 }

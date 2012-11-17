@@ -3,11 +3,7 @@
 
 *
 
-#Except the src and assets directories#
-#and everything in them		      #
-#######################################
-
-!/src/
-!src/*
-!/assets/
-!assets/*
+#The sub directories /src and /assets
+#have their own .gitignore files
+#that undo the ignore everything in this
+#file.
