@@ -164,16 +164,17 @@ public class SoundsManager {
     //--------------------------------------------------------------------------
     //Use the public final vars to determine the sound's
     //index in the array.
+    //playing: True = make it play, False = make it stop playing
     //returns 0 for "a-ok", 1 for "fuuuuuuuuuuu..."
     public byte setPlaying(short index, boolean playing){
         //turns the sound off for debugging.
         if(!debuggingGlobals.DEBUG_SOUND_OFF){
             //make sure you arn't stustustupid or something.
             if(_audioNodes[index] != null){
-                if(playing) {
+                if(playing) { //if it should be playing
                     _audioNodes[index].play();
                 }
-                else {
+                else { //else it needs to be paused
                     _audioNodes[index].pause();
                 }
                 return 0;
