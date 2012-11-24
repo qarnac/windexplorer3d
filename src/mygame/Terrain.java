@@ -160,7 +160,7 @@ public class Terrain {
     
     
     //--------------------------------------------------------------------------
-    
+    //Getter functions
     public Node getTerrainNode(){
         return terrainNode;
     }
