@@ -35,6 +35,11 @@ public class CameraController{
     //private final float CAMERA_START_X = -2000f;
     //private final float CAMERA_START_Y = 10f;
     //private final float CAMERA_START_Z = -2000f;
+    /*
+     * Causey comments: These are the starting values for the camera relative
+     * to the first level correct? If so these will need to not be hard coded
+     * when we add additional levels.
+     */
     private final float CAMERA_START_X = -2064f;
     private final float CAMERA_START_Y = 16f;
     private final float CAMERA_START_Z = -3037f;
@@ -74,6 +79,12 @@ public class CameraController{
         
         //move the physics body, walk in the direction of the difference
         //between the original position vector and the new one.
+        /*
+         * Causey Comments: Moe! I am failing at vector math over here....
+         * This obviously works but as far as I understood vector maths wouldn't
+         * subtracting positionVector from its original clone set the walk in
+         * the oppposite direction from where we want to walk? Help!
+         */
         cameraPhysicsBody.setWalkDirection(positionVector.subtract(originalPositionVectorClone));
         
         //System.out.println("move Vector: " + move);
@@ -118,6 +129,12 @@ public class CameraController{
         
         //move the physics body, walk in the direction of the difference
         //between the original position vector and the new one.
+        /*
+         * Causey Comments: Moe! I am failing at vector math over here....
+         * This obviously works but as far as I understood vector maths wouldn't
+         * subtracting positionVector from its original clone set the walk in
+         * the oppposite direction from where we want to walk? Help!
+         */
         cameraPhysicsBody.setWalkDirection(positionVector.subtract(originalPositionVectorClone));
         
         //System.out.println("move Vector: " + move);
@@ -155,12 +172,17 @@ public class CameraController{
      * 
      */
     
+    /*
+     * Causey Comments: this function is not used anywhere. What is it for?
+     */
     public void rotateCamera(float x, float y, float z){
         float[] angles = new float[]{x,y,z};
     }
     
     
-    
+    /*
+     * Getter Function for returning the camera character control
+     */
     public CharacterControl getCameraPhysicsBody(){
         return cameraPhysicsBody;
     }
