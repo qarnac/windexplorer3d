@@ -132,6 +132,7 @@ public class Cockpit {
      * Sets the text on the HUD. 
      * @param in
      * @return 0 = all good.  1 = lockout in effect.  2 = string is too long.
+     * causey: not used, is this a new function to replace the other one?
      */
     public byte setHUDtext(String in){
         //only do anything if there isn't a lockout.
