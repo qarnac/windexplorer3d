@@ -1,6 +1,5 @@
 /**
  * @author Ryan
-* test
  * 
  * Wind Explorer 3D
  */
@@ -329,7 +328,6 @@ public class Main extends SimpleApplication {
             //AND TELL THE USER THEY CAN LAND
             placementRaycastResults = windFarmPlacementChecker.getPlacementResult();
             placementRaycastHit = placementRaycastResults.size() > 0;
-
             if(placementRaycastHit){
                 cockpitObj.setHUDtextUnedited("Press Space to\nland here.");
             }//if
