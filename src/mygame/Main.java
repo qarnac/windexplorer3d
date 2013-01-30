@@ -130,8 +130,10 @@ public class Main extends SimpleApplication {
     private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
     
     public final boolean DEBUG_INTRO_OFF = true;
-    public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
+    public final boolean DEBUG_OUTPUT_CAM_POSITION = true;
     public final boolean DEBUG_SHOW_COCKPIT = true;
+    
+    public Container testContainer;
 
     
     //--------------------------------------------------------------------------
@@ -259,6 +261,20 @@ public class Main extends SimpleApplication {
         
         //generic timer for levels
         levelTimer = new LevelTimer();
+        
+        //EXPERIMENTAL STUFF----------
+        testContainer = new Container(this.assetManager);
+            ComponentSound soundComp = new ComponentSound();
+            soundComp.setFileName("Sounds/Button_Press.wav");
+            
+            ComponentSpatial spatialComp = new ComponentSpatial();
+            spatialComp.setPath("Models/town/main.j3o");
+            spatialComp.setLocalTranslation(0, 0, 0);
+            
+        testContainer.addModule(soundComp);
+        testContainer.addModule(spatialComp);
+        
+         
     }//method
     
     
@@ -276,6 +292,7 @@ public class Main extends SimpleApplication {
      */
     @Override
     public void simpleUpdate(float tpf) {
+        testContainer.run();
         //if a scene is being displayed,
         //make sure to update the manager for
         //the time that has passed.
@@ -541,6 +558,15 @@ public class Main extends SimpleApplication {
     
     //Will start the first level
     public void startLevel1(){  
+        
+        Node containerNode = testContainer.init();
+        this.rootNode.attachChild(containerNode);
+        ComponentSpatial test = (ComponentSpatial) testContainer.getComponentByID("spatial");
+        if(test != null){
+            test.setLocalTranslation(-1500, 100, -300);
+            
+        }
+        
         //Controls user input
         inputCont = new InputController(this);
         //map the input to the first profile in the config file.
