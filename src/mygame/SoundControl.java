@@ -34,7 +34,7 @@ public class SoundControl extends AbstractControl {
     private float outerAngle;
     
     
-    public SoundControl(AssetManager assetMan, String asset)
+    public SoundControl(AssetManager assetMan, String assetPath, boolean stream)
     {
         /*
          * constructor stuff here
@@ -44,7 +44,10 @@ public class SoundControl extends AbstractControl {
          * pass in a single sound. Perhaps this should be the path
          * to the sound asset as read from a config file?
          */
-        sound = new AudioNode(assetManager, asset);
+        assetManager = assetMan;
+        asset = assetPath;
+        streamed = stream;
+        sound = new AudioNode(assetManager, asset, streamed);
     }
     
     @Override
@@ -66,7 +69,8 @@ public class SoundControl extends AbstractControl {
     }
 
     public Control cloneForSpatial(Spatial spatial) {
-        final SoundControl sControl = new SoundControl(assetManager, asset);
+        final SoundControl sControl = new SoundControl(assetManager, asset, 
+                streamed);
         sControl.setSpatial(spatial);
         return sControl;
     }
