@@ -34,7 +34,8 @@ public class SoundControl extends AbstractControl {
     private float outerAngle;
     
     
-    public SoundControl(AssetManager assetMan, String assetPath, boolean stream)
+    public SoundControl(AssetManager assetMan, String assetPath, boolean stream,
+            boolean loop)
     {
         /*
          * constructor stuff here
@@ -47,7 +48,14 @@ public class SoundControl extends AbstractControl {
         assetManager = assetMan;
         asset = assetPath;
         streamed = stream;
+        looped = loop;
+        positional = false;//temporary
+        directional = false;//temporary
+        reverb = false;//temporary
         sound = new AudioNode(assetManager, asset, streamed);
+        sound.setLooping(looped);
+        //attach the sound to the spatial's parent node
+        spatial.getParent().attachChild(sound);
     }
     
     @Override
@@ -70,7 +78,7 @@ public class SoundControl extends AbstractControl {
 
     public Control cloneForSpatial(Spatial spatial) {
         final SoundControl sControl = new SoundControl(assetManager, asset, 
-                streamed);
+                streamed, looped);
         sControl.setSpatial(spatial);
         return sControl;
     }

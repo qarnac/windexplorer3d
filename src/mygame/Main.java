@@ -642,6 +642,14 @@ public class Main extends SimpleApplication {
         catch(Exception e){
             System.out.println("HEYHEY!");
         }
+        /*
+         * Super Duper Experimental SoundControl!
+         */
+        Spatial NaturesNinja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
+        SoundControl testSound = new SoundControl(assetManager, "Sounds/Button_Press.wav",
+                false, true);
+        NaturesNinja.addControl(testSound);
+        NaturesNinja.getControl(SoundControl.class);
         
         //----------------------------------------------------------------------
             
