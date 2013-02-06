@@ -644,14 +644,18 @@ public class Main extends SimpleApplication {
         }
         
         //----------------------------------------------------------------------
-            
-        
+        townNode = new Node();
+        rootNode.attachChild(townNode);
+        townContainer = new ContainerTown(townNode, this.assetManager);
+        townContainer.initModel("Models/town/main.j3o", 0.0f, new Vector3f(-3000, 100, -1000), 2.0f);
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.
         gamePlaying = true;
     }//method
     
+    Node townNode;
+    ContainerTown townContainer;
 //------------------------------------------------------------------------------
     
      /**

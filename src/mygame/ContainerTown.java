@@ -14,9 +14,9 @@ import com.jme3.scene.Node;
  */
 public class ContainerTown {
     
-    Node parentNode;
-    ComponentTownModel townModel;
-    AssetManager assetMan;
+    private Node parentNode;
+    private ComponentTownModel townModel;
+    private AssetManager assetMan;
     
     public ContainerTown(Node parentNode, AssetManager assetMan){
         this.parentNode = parentNode;
@@ -25,9 +25,11 @@ public class ContainerTown {
     }
     
     
-    public void initModel(String path, float rotation, Vector3f translation){
-        townModel = new ComponentTownModel(parentNode, assetMan, path, rotation, translation);
+    public void initModel(String path, float rotation, Vector3f translation, float scale){
+        townModel = new ComponentTownModel(parentNode, assetMan, path, rotation, translation, scale);
     }
+    
+    
     
     
 }

@@ -20,8 +20,10 @@ public class ComponentTownModel {
     private Spatial townSpatial;
     private Quaternion townRotation;
     
+    
+    
     public ComponentTownModel(Node parentNode, AssetManager assetManager, 
-            String path, float rotation, Vector3f translation){
+            String path, float rotation, Vector3f translation, float scale){
         this.path = path;
         townSpatial = assetManager.loadModel(path);
         
@@ -31,6 +33,8 @@ public class ComponentTownModel {
         townSpatial.setLocalRotation(townRotation);
         
         townSpatial.setLocalTranslation(translation);
+        
+        townSpatial.setLocalScale(scale);
         
         parentNode.attachChild(townSpatial);
     }//method
