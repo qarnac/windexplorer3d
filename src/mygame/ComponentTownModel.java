@@ -25,16 +25,21 @@ public class ComponentTownModel {
     public ComponentTownModel(Node parentNode, AssetManager assetManager, 
             String path, float rotation, Vector3f translation, float scale){
         this.path = path;
-        townSpatial = assetManager.loadModel(path);
-        
-        //Rotate BEFORE translate
-        townRotation = new Quaternion();
-        townRotation.fromAngleAxis(rotation, Vector3f.UNIT_Y);
-        townSpatial.setLocalRotation(townRotation);
-        
-        townSpatial.setLocalTranslation(translation);
-        
-        townSpatial.setLocalScale(scale);
+        try{
+            townSpatial = assetManager.loadModel(path);
+
+            //Rotate BEFORE translate
+            townRotation = new Quaternion();
+            townRotation.fromAngleAxis(rotation, Vector3f.UNIT_Y);
+            townSpatial.setLocalRotation(townRotation);
+
+            townSpatial.setLocalTranslation(translation);
+
+            townSpatial.setLocalScale(scale);
+        }
+        catch(Exception e){
+            System.err.println("TownModel: Asset not found.");
+        }
         
         parentNode.attachChild(townSpatial);
     }//method

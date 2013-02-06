@@ -12,17 +12,23 @@ import com.jme3.scene.Node;
  *
  * @author cmb
  */
+
 public class ContainerTown {
     
     private Node parentNode;
-    private ComponentTownModel townModel;
     private AssetManager assetMan;
+    
+    private ComponentTownModel townModel;
+    private ComponentTownSound townSound;
+    
+    
     
     public ContainerTown(Node parentNode, AssetManager assetMan){
         this.parentNode = parentNode;
-        townModel = null;
         this.assetMan = assetMan;
+        townModel = null;
     }
+    
     
     
     public void initModel(String path, float rotation, Vector3f translation, float scale){
@@ -31,5 +37,11 @@ public class ContainerTown {
     
     
     
+    public void initSound(String path, float volume, boolean looping){
+        townSound = new ComponentTownSound(parentNode, assetMan, path, volume, looping);
+    }
     
-}
+    
+    
+    
+}//class
