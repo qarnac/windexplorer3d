@@ -131,7 +131,7 @@ public class Main extends SimpleApplication {
     public final boolean DEBUG_INTRO_OFF = true;
     public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
     public final boolean DEBUG_SHOW_COCKPIT = true;
-
+    
     
     //--------------------------------------------------------------------------
     //FIRST!!!
@@ -337,7 +337,7 @@ public class Main extends SimpleApplication {
                 
             //show changes to HUD
             cockpitObj.buildAndShowText();
-            
+                        
         }//if gamePlaying
              
     }//method
@@ -642,23 +642,30 @@ public class Main extends SimpleApplication {
         catch(Exception e){
             System.out.println("HEYHEY!");
         }
-        /*
-         * Super Duper Experimental SoundControl!
-         */
-        Spatial NaturesNinja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
-        SoundControl testSound = new SoundControl(assetManager, "Sounds/Button_Press.wav",
-                false, true);
-        NaturesNinja.addControl(testSound);
-        NaturesNinja.getControl(SoundControl.class);
         
         //----------------------------------------------------------------------
-            
+        /*
+         * SoundControl Supertest
+         */
+        NaturesNinja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
+        testControl = new SoundControl(assetManager, "Sounds/Button_Press.wav", false);
+        NaturesNinja.addControl(testControl);
+        testnode.attachChild(NaturesNinja);
+        rootNode.attachChild(testnode);
+        
         
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.
         gamePlaying = true;
     }//method
+    
+    /*
+     * Related to SoundControl Supertest
+     */
+    Node testnode;
+    Spatial NaturesNinja;
+    SoundControl testControl;
     
 //------------------------------------------------------------------------------
     

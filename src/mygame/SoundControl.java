@@ -18,24 +18,9 @@ import com.jme3.scene.control.Control;
  */
 public class SoundControl extends AbstractControl {
 
-    private AudioNode sound;
-    private String asset;
-    private AssetManager assetManager;
-    private boolean streamed;
-    private boolean looped;
-    private boolean positional;
-    private boolean directional;
-    private boolean reverb;
-    private float volume;
-    private float pitch;
-    private float refDist;
-    private float maxDist;
-    private float innerAngle;
-    private float outerAngle;
+    private AudioNode sound;    
     
-    
-    public SoundControl(AssetManager assetMan, String assetPath, boolean stream,
-            boolean loop)
+    public SoundControl(AssetManager assetMan, String assetPath, boolean streamed)
     {
         /*
          * constructor stuff here
@@ -45,17 +30,16 @@ public class SoundControl extends AbstractControl {
          * pass in a single sound. Perhaps this should be the path
          * to the sound asset as read from a config file?
          */
-        assetManager = assetMan;
-        asset = assetPath;
-        streamed = stream;
-        looped = loop;
-        positional = false;//temporary
-        directional = false;//temporary
-        reverb = false;//temporary
-        sound = new AudioNode(assetManager, asset, streamed);
-        sound.setLooping(looped);
-        //attach the sound to the spatial's parent node
-        spatial.getParent().attachChild(sound);
+        sound = new AudioNode(assetMan, assetPath, streamed);
+    }
+    
+    public SoundControl(AudioNode incomingAudio)
+    {
+        sound = incomingAudio;
+    }
+    
+    private SoundControl()
+    {
     }
     
     @Override
@@ -63,7 +47,7 @@ public class SoundControl extends AbstractControl {
         if(this.isEnabled()) //make sure the sound control is enabled
         {
             //do positional sound updates here if needed
-            if(positional)
+            if(sound.isPositional())
             {
                 sound.setLocalTranslation(spatial.getLocalTranslation());
                 sound.setLocalRotation(spatial.getLocalRotation());
@@ -77,24 +61,9 @@ public class SoundControl extends AbstractControl {
     }
 
     public Control cloneForSpatial(Spatial spatial) {
-        final SoundControl sControl = new SoundControl(assetManager, asset, 
-                streamed, looped);
+        final SoundControl sControl = new SoundControl();
+        sControl.sound = this.sound.clone();
         sControl.setSpatial(spatial);
         return sControl;
-    }
-    
-    public void playSound()
-    {
-        sound.play();
-    }
-    
-    public void playSoundInstance()
-    {
-        sound.playInstance();
-    }
-    
-    public void pauseSound()
-    {
-        sound.pause();
     }
 }
