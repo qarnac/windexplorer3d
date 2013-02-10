@@ -7,6 +7,7 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Vector3f;
@@ -337,6 +338,16 @@ public class Main extends SimpleApplication {
                 
             //show changes to HUD
             cockpitObj.buildAndShowText();
+            
+            /*
+             * Related to SoundControl Super test
+             */
+            //need to move this listener with camera to make positional audio
+            //work
+            listener.setLocation(cam.getLocation());
+            listener.setRotation(cam.getRotation());
+            //rotate the ninja to demonstrate positional audio
+            testnode.rotate(0, -1*tpf, 0);
                         
         }//if gamePlaying
              
@@ -648,10 +659,21 @@ public class Main extends SimpleApplication {
          * SoundControl Supertest
          */
         NaturesNinja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
-        testControl = new SoundControl(assetManager, "Sounds/Button_Press.wav", false);
+        testAudio = new AudioNode(assetManager, "Sound/Environment/Ocean Waves.ogg", false);
+        testAudio.setLooping(true);
+        testAudio.setPositional(true);
+        testAudio.setVolume(3f);
+        testAudio.setRefDistance(3f);
+        testAudio.setMaxDistance(1000f);
+        testControl = new SoundControl(testAudio);
         NaturesNinja.addControl(testControl);
+        testnode = new Node();
         testnode.attachChild(NaturesNinja);
+        NaturesNinja.getControl(SoundControl.class).initAudio();
         rootNode.attachChild(testnode);
+        NaturesNinja.getControl(SoundControl.class).playSound();
+        testnode.setLocalTranslation(-1500, 200, -300);
+        NaturesNinja.setLocalTranslation(500, 0, 0);
         
         
         
@@ -666,6 +688,7 @@ public class Main extends SimpleApplication {
     Node testnode;
     Spatial NaturesNinja;
     SoundControl testControl;
+    AudioNode testAudio;
     
 //------------------------------------------------------------------------------
     

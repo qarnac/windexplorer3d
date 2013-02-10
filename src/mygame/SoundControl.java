@@ -66,4 +66,14 @@ public class SoundControl extends AbstractControl {
         sControl.setSpatial(spatial);
         return sControl;
     }
+    
+    public void initAudio()
+    {
+        spatial.getParent().attachChild(sound);
+    }
+    
+    public void playSound()
+    {
+        sound.play();
+    }
 }
