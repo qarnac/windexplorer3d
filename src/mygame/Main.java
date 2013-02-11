@@ -667,9 +667,9 @@ public class Main extends SimpleApplication {
         testAudio.setMaxDistance(1000f);
         testControl = new SoundControl(testAudio);
         NaturesNinja.addControl(testControl);
+        NaturesNinja.getControl(SoundControl.class).initAudio();
         testnode = new Node();
         testnode.attachChild(NaturesNinja);
-        NaturesNinja.getControl(SoundControl.class).initAudio();
         rootNode.attachChild(testnode);
         NaturesNinja.getControl(SoundControl.class).playSound();
         testnode.setLocalTranslation(-1500, 200, -300);

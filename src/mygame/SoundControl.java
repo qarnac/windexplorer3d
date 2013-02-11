@@ -8,6 +8,7 @@ import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioNode;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 import com.jme3.scene.control.Control;
@@ -37,11 +38,7 @@ public class SoundControl extends AbstractControl {
     {
         sound = incomingAudio;
     }
-    
-    private SoundControl()
-    {
-    }
-    
+
     @Override
     protected void controlUpdate(float tpf) {
         if(this.isEnabled()) //make sure the sound control is enabled
@@ -49,6 +46,8 @@ public class SoundControl extends AbstractControl {
             //do positional sound updates here if needed
             if(sound.isPositional())
             {
+                //these two lines will keep the sound at the same location
+                //as the spatial if the sound is positional.
                 sound.setLocalTranslation(spatial.getLocalTranslation());
                 sound.setLocalRotation(spatial.getLocalRotation());
             }
@@ -61,19 +60,41 @@ public class SoundControl extends AbstractControl {
     }
 
     public Control cloneForSpatial(Spatial spatial) {
-        final SoundControl sControl = new SoundControl();
-        sControl.sound = this.sound.clone();
+        final SoundControl sControl = new SoundControl(sound);
         sControl.setSpatial(spatial);
+        sControl.initAudio();
         return sControl;
     }
     
+    /*
+     * initialize the SoundControl by making sure the spatial has the
+     * audio node attached to it so weird things don't happen when you try to
+     * play the sound
+     */
     public void initAudio()
     {
-        spatial.getParent().attachChild(sound);
+        //this might be dangerous, need to research more but seems to work
+        //for now
+        ((Node)spatial).attachChild(sound);
     }
     
     public void playSound()
     {
         sound.play();
+    }
+    
+    public void pauseSound()
+    {
+        sound.pause();
+    }
+    
+    public void stopSound()
+    {
+        sound.stop();
+    }
+    
+    public void setVolume(float f)
+    {
+        sound.setVolume(f);
     }
 }
