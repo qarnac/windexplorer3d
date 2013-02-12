@@ -12,8 +12,10 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
 
 
@@ -665,11 +667,11 @@ public class Main extends SimpleApplication {
         testAudio.setVolume(3f);
         testAudio.setRefDistance(3f);
         testAudio.setMaxDistance(1000f);
-        testControl = new SoundControl(testAudio);
+        testControl = new SoundControl(testAudio, rootNode);
         NaturesNinja.addControl(testControl);
-        NaturesNinja.getControl(SoundControl.class).initAudio();
         testnode = new Node();
         testnode.attachChild(NaturesNinja);
+        NaturesNinja.getControl(SoundControl.class).initAudio();
         rootNode.attachChild(testnode);
         NaturesNinja.getControl(SoundControl.class).playSound();
         testnode.setLocalTranslation(-1500, 200, -300);

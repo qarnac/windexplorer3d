@@ -19,9 +19,11 @@ import com.jme3.scene.control.Control;
  */
 public class SoundControl extends AbstractControl {
 
-    private AudioNode sound;    
+    private AudioNode sound;  
+    private Node rootNode; 
     
-    public SoundControl(AssetManager assetMan, String assetPath, boolean streamed)
+    public SoundControl(AssetManager assetMan, String assetPath, boolean streamed
+            , Node root)
     {
         /*
          * constructor stuff here
@@ -32,11 +34,13 @@ public class SoundControl extends AbstractControl {
          * to the sound asset as read from a config file?
          */
         sound = new AudioNode(assetMan, assetPath, streamed);
+        rootNode = root;
     }
     
-    public SoundControl(AudioNode incomingAudio)
+    public SoundControl(AudioNode incomingAudio, Node root)
     {
         sound = incomingAudio;
+        rootNode = root;
     }
 
     @Override
@@ -60,22 +64,31 @@ public class SoundControl extends AbstractControl {
     }
 
     public Control cloneForSpatial(Spatial spatial) {
-        final SoundControl sControl = new SoundControl(sound);
+        final SoundControl sControl = new SoundControl(sound, rootNode);
         sControl.setSpatial(spatial);
         sControl.initAudio();
         return sControl;
     }
     
     /*
-     * initialize the SoundControl by making sure the spatial has the
-     * audio node attached to it so weird things don't happen when you try to
-     * play the sound
+     * initialize the SoundControl by making sure the audio node is attached
+     * to the parent of spatial.
+     * WARNING: This means you must attach the spatial to some node before
+     * running this function
      */
     public void initAudio()
     {
-        //this might be dangerous, need to research more but seems to work
-        //for now
-        ((Node)spatial).attachChild(sound);
+        Node temp = spatial.getParent();
+        //if this node does not have a parent
+        if(temp == null)
+        {
+            rootNode.attachChild(sound);
+        }
+        else
+        {
+            temp.attachChild(sound);
+        }
+        
     }
     
     public void playSound()
