@@ -14,7 +14,8 @@ import com.jme3.scene.Node;
 public class ComponentSound extends ComponentAbstract{
     
     public final float DEFAULT_VOLUME = (float) 0.2;
-    public final String ID = "sound";
+    test = 1;
+    
     
     String soundPath = null;
     private AudioNode audioNode;
