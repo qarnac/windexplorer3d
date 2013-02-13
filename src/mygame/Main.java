@@ -7,6 +7,7 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Vector3f;
@@ -338,6 +339,8 @@ public class Main extends SimpleApplication {
             //show changes to HUD
             cockpitObj.buildAndShowText();
             
+            listener.setLocation(cam.getLocation());
+            listener.setRotation(cam.getRotation());
         }//if gamePlaying
              
     }//method
@@ -647,7 +650,18 @@ public class Main extends SimpleApplication {
         townNode = new Node();
         rootNode.attachChild(townNode);
         townContainer = new ContainerTown(townNode, this.assetManager);
-        townContainer.initModel("Models/town/main.j3o", 0.0f, new Vector3f(-3000, 100, -1000), 2.0f);
+        townContainer.initModel("Models/town/main.j3o", 0.0f, new Vector3f(0, 0, 0), 2.0f);
+        townContainer.initSound("Sound/Environment/Ocean Waves.ogg", 3.0f, true);
+        townNode.setLocalTranslation(new Vector3f(-3000, 100, -1000));
+        
+        try{
+            townContainer.getSoundManager().getAudioNode().play();
+            townContainer.getSoundManager().getAudioNode().setRefDistance(3f);
+            townContainer.getSoundManager().getAudioNode().setMaxDistance(10000f);
+        }
+        catch (Exception e){};
+        
+        
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.

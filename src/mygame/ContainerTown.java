@@ -42,6 +42,9 @@ public class ContainerTown {
     }
     
     
+    public ComponentTownSound getSoundManager(){
+        return townSound;
+    }
     
     
 }//class

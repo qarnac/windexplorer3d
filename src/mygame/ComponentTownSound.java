@@ -28,10 +28,10 @@ public class ComponentTownSound{
             parentNode.attachChild(audioNode);
         }
         catch(Exception e){
-            System.err.println("TownSound: Asset Not Found.");
+            System.out.println("TownSound: Asset Not Found.");
         }
         finally{
-            audioNode = null;
+            
         }
         
     }//method
