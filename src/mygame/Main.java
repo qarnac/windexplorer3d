@@ -626,32 +626,13 @@ public class Main extends SimpleApplication {
         //displays all the towns
         townsManager.showLevel1Towns();
         
-        //THIS IS FOR TESTING MAIO's MODELS
-        //-------------------------------------------------------------
-        
-        try{
-            Spatial spatial = getAssetManager().loadModel("Models/cubetest3/cube UV.j3o");
-            //spatial.setLocalScale(100);
-            //Material mat_stl = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-            //Texture tex_ml = assetManager.loadTexture("Models/cubetest/texture/wall with window.jpg");
-            //mat_stl.setTexture("ColorMap", tex_ml);
-            //spatial.setMaterial(mat_stl);
-            
-            Node testNode = new Node();
-            testNode.attachChild(spatial);
-            testNode.setLocalTranslation(-2369, 27, -2648);
-            rootNode.attachChild(testNode);
-        }
-        catch(Exception e){
-            System.out.println("HEYHEY!");
-        }
         
         //----------------------------------------------------------------------
         townNode = new Node();
         rootNode.attachChild(townNode);
         townContainer = new ContainerTown(townNode, this.assetManager);
         townContainer.initModel("Models/town/main.j3o", 0.0f, new Vector3f(0, 0, 0), 2.0f);
-        townContainer.initSound("Sound/Environment/Ocean Waves.ogg", 3.0f, true);
+        townContainer.initSound("Sounds/traffic.wav", 3.0f, true);
         townNode.setLocalTranslation(new Vector3f(-3000, 100, -1000));
         
         try{
@@ -704,3 +685,24 @@ public class Main extends SimpleApplication {
 
 
 
+/*
+ * //THIS IS FOR TESTING MAIO's MODELS
+        //-------------------------------------------------------------
+        
+        try{
+            Spatial spatial = getAssetManager().loadModel("Models/cubetest3/cube UV.j3o");
+            //spatial.setLocalScale(100);
+            //Material mat_stl = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+            //Texture tex_ml = assetManager.loadTexture("Models/cubetest/texture/wall with window.jpg");
+            //mat_stl.setTexture("ColorMap", tex_ml);
+            //spatial.setMaterial(mat_stl);
+            
+            Node testNode = new Node();
+            testNode.attachChild(spatial);
+            testNode.setLocalTranslation(-2369, 27, -2648);
+            rootNode.attachChild(testNode);
+        }
+        catch(Exception e){
+            System.out.println("HEYHEY!");
+        }
+ */
