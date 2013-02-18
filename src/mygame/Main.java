@@ -7,6 +7,7 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
@@ -542,6 +543,11 @@ public class Main extends SimpleApplication {
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
     
+    //level 1 vars
+    Node townNode1;
+    Node townNode2;
+    Node townNode3;
+    
     //Will start the first level
     public void startLevel1(){  
         //Controls user input
@@ -608,9 +614,6 @@ public class Main extends SimpleApplication {
         soundsManager.setPlaying(soundsManager.HELI_BLADES_INDEX, true);
         
         //------------------------------
-        //PIES EXPERIMENT
-        //Spatial scene = assetManager.loadModel("Scenes/MainMenu.j3o");
-        //rootNode.attachChild(scene);
         
 
         levelTimer.setTimeRemaining(dataLevel1General.LEVEL_1_GAME_TIME);
@@ -622,35 +625,51 @@ public class Main extends SimpleApplication {
         windFarmPlacementChecker.loadSmokeOnAllObjects();
         
         //can be called else where to improve load time.
-        townsManager.loadTownAssets();
+        //townsManager.loadTownAssets();
         //displays all the towns
-        townsManager.showLevel1Towns();
-        
+        //townsManager.showLevel1Towns();
         
         //----------------------------------------------------------------------
-        townNode = new Node();
-        rootNode.attachChild(townNode);
-        townContainer = new ContainerTown(townNode, this.assetManager);
-        townContainer.initModel("Models/town/main.j3o", 0.0f, new Vector3f(0, 0, 0), 2.0f);
-        townContainer.initSound("Sounds/traffic.wav", 3.0f, true);
-        townNode.setLocalTranslation(new Vector3f(-3000, 100, -1000));
+        townNode1 = new Node();
+        rootNode.attachChild(townNode1);
+        townNode2 = new Node();
+        rootNode.attachChild(townNode2);
+        townNode3 = new Node();
+        rootNode.attachChild(townNode3);
         
-        try{
-            townContainer.getSoundManager().getAudioNode().play();
-            townContainer.getSoundManager().getAudioNode().setRefDistance(3f);
-            townContainer.getSoundManager().getAudioNode().setMaxDistance(10000f);
-        }
-        catch (Exception e){};
+        //MAKE THE TOWN OBJECTS------
+        //town1
+        ContainerTown townContainer = new ContainerTown(townNode1, this.assetManager, 
+                "Models/town/main.j3o", 0.0f, new Vector3f(0,0,0), 4.0f, 
+                "Sounds/townSound.wav", 1.0f, true);
+        townContainer.initModel();
+        townContainer.initSound();
+        townNode1.setLocalTranslation(new Vector3f(-1857, -3, -2680));
         
         
+        //town2
+        ContainerTown townContainer2 = new ContainerTown(townNode2, this.assetManager, 
+                "Models/town/main.j3o", 0.0f, new Vector3f(0,0,0), 4.0f, 
+                "Sounds/townSound.wav", 1.0f, true);
+        townContainer2.initModel();
+        townContainer2.initSound();
+        townNode2.setLocalTranslation(new Vector3f(-3979, -3, 3368));
+        
+        //town3
+        ContainerTown townContainer3 = new ContainerTown(townNode3, this.assetManager, 
+                "Models/town/main.j3o", 0.0f, new Vector3f(0,0,0), 4.0f, 
+                "Sounds/townSound.wav", 1.0f, true);
+        townContainer3.initModel();
+        townContainer3.initSound();
+        townNode3.setLocalTranslation(new Vector3f(2490, -3, 3071));
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.
         gamePlaying = true;
+        
     }//method
     
-    Node townNode;
-    ContainerTown townContainer;
+    
 //------------------------------------------------------------------------------
     
      /**
