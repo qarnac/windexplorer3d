@@ -122,7 +122,7 @@ public class WindFarmPlacementChecker {
             if(debugGlobalsObj.DEBUG_PLACEMENT_SHAPES_VISIBLE){
                 //default material to make the shape visible
                 Material mat_stl = new Material(mainAssetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-                Texture tex_ml = mainAssetManager.loadTexture("Textures/HelicopterBlades.png");
+                Texture tex_ml = mainAssetManager.loadTexture("Textures/Cockpit.png");
                 mat_stl.setTexture("ColorMap", tex_ml);
                 geom.setMaterial(mat_stl);
             }//if
