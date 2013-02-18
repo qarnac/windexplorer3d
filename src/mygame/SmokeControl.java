@@ -68,6 +68,7 @@ public class SmokeControl extends AbstractControl{
         //yet
     }
 
+    //needed to make sure we can save/load when that functionality is implemented
     public Control cloneForSpatial(Spatial spatial) {
         final SmokeControl clone = new SmokeControl(mainAssetManager, root);
         clone.setSpatial(spatial);

@@ -147,7 +147,7 @@ public class WindFarmPlacementChecker {
             for(int i = 0; i < levelDataObj._shapesInThisLevel.length; ++i){
                 _EffectEmitterIndividualNodes[i] = new Node();
 
-                ParticleEmitter indicator = new ParticleEmitter("Emitter", ParticleMesh.Type.Triangle, 30);
+                /*ParticleEmitter indicator = new ParticleEmitter("Emitter", ParticleMesh.Type.Triangle, 30);
                 Material material = new Material(mainAssetManager, "Common/MatDefs/Misc/Particle.j3md");
                 material.setTexture("Texture", mainAssetManager.loadTexture("Effects/smoke3.png"));
                 indicator.setMaterial(material);
@@ -162,11 +162,18 @@ public class WindFarmPlacementChecker {
                 indicator.setGravity(0, 0, 0);
                 indicator.setLowLife(1f);
                 indicator.setHighLife(3f);
-                indicator.getParticleInfluencer().setVelocityVariation(0.3f);
+                indicator.getParticleInfluencer().setVelocityVariation(0.3f);*/
+                
+                /*
+                 * Using the new SmokeControl to implement the smoke emitters instead
+                 * of the above code.
+                 */
+                SmokeControl smokeyTheBear = new SmokeControl(mainAssetManager, mainRootNode);
 
-                _EffectEmitterIndividualNodes[i].attachChild(indicator);
+                _EffectEmitterIndividualNodes[i].addControl(smokeyTheBear);
                 _EffectEmitterIndividualNodes[i].setLocalTranslation(levelDataObj._shapesInThisLevel[i].centerX, levelDataObj._shapesInThisLevel[i].indicatorHeight, levelDataObj._shapesInThisLevel[i].centerZ);
                 placementIndicatorMasterNode.attachChild(_EffectEmitterIndividualNodes[i]);
+                _EffectEmitterIndividualNodes[i].getControl(SmokeControl.class).initSmoke();
 
             }//for
             placementIndicatorMasterNode.setCullHint(CullHint.Never);
