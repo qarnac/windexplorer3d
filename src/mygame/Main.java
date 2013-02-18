@@ -677,7 +677,9 @@ public class Main extends SimpleApplication {
         testnode.setLocalTranslation(-1500, 200, -300);
         NaturesNinja.setLocalTranslation(500, 0, 0);
         
-        
+        testSmoke = new SmokeControl(assetManager, rootNode);
+        NaturesNinja.addControl(testSmoke);
+        NaturesNinja.getControl(SmokeControl.class).initSmoke();
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.
@@ -691,6 +693,7 @@ public class Main extends SimpleApplication {
     Spatial NaturesNinja;
     SoundControl testControl;
     AudioNode testAudio;
+    SmokeControl testSmoke;
     
 //------------------------------------------------------------------------------
     
