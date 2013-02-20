@@ -64,7 +64,7 @@ public class CameraController{
     //The integration with the jme3 physics system is crappy, but it works for now.
     public void moveCamera(Vector3f move, float rotation, float tiltX, float tiltZ){
         //debugging outputs
-        if(mainHandle.DEBUG_OUTPUT_CAM_POSITION){
+        if(mainHandle.DEBUG_GLOBALS_OBJ.DEBUG_OUTPUT_CAM_POSITION){
             System.out.println("----------------------------\nPosition Vector: " + positionVector);
             System.out.println("Move Vector: " + move + "\n----------------------------\n");
         }
@@ -114,7 +114,7 @@ public class CameraController{
     //Copy of old moveCamera method, trying out new data struct.
     public void moveCamera(DataCameraController dataStructIn){
         //debugging outputs
-        if(mainHandle.DEBUG_OUTPUT_CAM_POSITION){
+        if(mainHandle.DEBUG_GLOBALS_OBJ.DEBUG_OUTPUT_CAM_POSITION){
             System.out.println("----------------------------\nPosition Vector: " + positionVector);
             System.out.println("Move Vector: " + dataStructIn.movementVector + "\n----------------------------\n");
         }

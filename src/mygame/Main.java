@@ -126,12 +126,7 @@ public class Main extends SimpleApplication {
     //--------------------------------------------------------------------------
     
     //This is slowly replacing the debug flags below...
-    private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
-    
-    public final boolean DEBUG_INTRO_OFF = true;
-    public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
-    public final boolean DEBUG_SHOW_COCKPIT = true;
-
+    public DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();;
     
     //--------------------------------------------------------------------------
     //FIRST!!!
@@ -313,7 +308,7 @@ public class Main extends SimpleApplication {
                 if(levelTimer.timeRemaining <= 0){
                     levelTimer.setTimerRunning(false);
                     gamePlaying = false;
-                    if(!DEBUG_INTRO_OFF)
+                    if(!DEBUG_GLOBALS_OBJ.DEBUG_INTRO_OFF)
                         routerForEndLossScene();
                     else
                         returnToMainMenuFromScene();
@@ -426,7 +421,7 @@ public class Main extends SimpleApplication {
         //SUPER TEMP HEY HEY HEY FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         currentLevel = 1;
         
-        if(!DEBUG_INTRO_OFF){
+        if(!DEBUG_GLOBALS_OBJ.DEBUG_INTRO_OFF){
             routerForStartScene();
             
         }//if
@@ -575,7 +570,7 @@ public class Main extends SimpleApplication {
         //COCKPIT STUFF
         cockpitObj = new Cockpit(this, "Textures/Cockpit.png", settings);
         cockpitObj.loadHud();
-        if(DEBUG_SHOW_COCKPIT){
+        if(DEBUG_GLOBALS_OBJ.DEBUG_SHOW_COCKPIT){
             cockpitObj.showCockpit();
         }
         
