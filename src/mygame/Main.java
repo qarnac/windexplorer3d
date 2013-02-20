@@ -7,14 +7,11 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.asset.AssetManager;
-import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import com.jme3.system.AppSettings;
 
 
@@ -112,11 +109,6 @@ public class Main extends SimpleApplication {
         //all the results from a raycast into the 
         //windfarm placement objects.
         public CollisionResults placementRaycastResults;
-
-        
-    //displays a town (and clones of said town)
-    //all around the map.
-    public ModelsTowns townsManager;
     
     //the level the user is on.
     public short currentLevel;
@@ -252,8 +244,6 @@ public class Main extends SimpleApplication {
         townData.assetManager = this.getAssetManager();
         townData.rootNode = this.getRootNode();
         townData.globalFlags = this.DEBUG_GLOBALS_OBJ;
-        townsManager = new ModelsTowns(townData);
-        townsManager.loadTownAssets();
         
         //Manages the 2d "scenes" in the game engine.
         sceneManager = new SceneManager(this, settings);
