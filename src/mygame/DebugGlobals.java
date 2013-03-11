@@ -10,7 +10,7 @@ package mygame;
  */
 public class DebugGlobals {
     
-    public final boolean DEBUG_SOUND_OFF = true;
+    public final boolean DEBUG_SOUND_OFF = false;
     public final boolean DEBUG_PLACEMENT_SHAPES_VISIBLE = true;
     public final boolean DEBUG_PLACEMENT_SHAPES_SMOKE_VISIBLE = true;
     

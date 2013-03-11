@@ -1,7 +1,7 @@
 /**
  * @author Ryan
  * 
- * Controls the camera movement.  
+ * Controls the camera movement.
  * Note: CameraPhysics is used to emulate different camera movement profiles,
  *       use that to make movement vectors and pass them in to here.
  * 
@@ -31,7 +31,7 @@ public class CameraController{
     private CharacterControl cameraPhysicsBody;
     CapsuleCollisionShape capsuleShape;
     
-    private final short MAX_HEIGHT = 250;
+    private final short MAX_HEIGHT = 1000;
     //private final float CAMERA_START_X = -2000f;
     //private final float CAMERA_START_Y = 10f;
     //private final float CAMERA_START_Z = -2000f;

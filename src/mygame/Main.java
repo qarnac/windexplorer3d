@@ -10,6 +10,13 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.audio.AudioNode;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResults;
+import com.jme3.effect.ParticleEmitter;
+import com.jme3.effect.ParticleMesh;
+import com.jme3.input.MouseInput;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
@@ -350,6 +357,10 @@ public class Main extends SimpleApplication {
             listener.setRotation(cam.getRotation());
             //rotate the ninja to demonstrate positional audio
             testnode.rotate(0, -1*tpf, 0);
+            
+            /*
+             * In this area we will try to test manipulating the smoke live time
+             */
                         
         }//if gamePlaying
              
@@ -658,7 +669,7 @@ public class Main extends SimpleApplication {
         
         //----------------------------------------------------------------------
         /*
-         * SoundControl Supertest
+         * Supertest
          */
         NaturesNinja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
         testAudio = new AudioNode(assetManager, "Sound/Environment/Ocean Waves.ogg", false);
@@ -677,9 +688,29 @@ public class Main extends SimpleApplication {
         testnode.setLocalTranslation(-1500, 200, -300);
         NaturesNinja.setLocalTranslation(500, 0, 0);
         
-        testSmoke = new SmokeControl(assetManager, rootNode);
+        //creating testSmoke and adding it here
+        ParticleEmitter blackSmoke = new ParticleEmitter("Emitter", ParticleMesh.Type.Triangle, 30);
+        Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/Particle.j3md");
+        mat1.setTexture("Texture", assetManager.loadTexture("Effects/smoke3.png"));
+        blackSmoke.setMaterial(mat1);
+        blackSmoke.setImagesX(1);
+        blackSmoke.setImagesY(1);
+        blackSmoke.setStartColor(new ColorRGBA(0f, 0f, 0f, 1f));
+        blackSmoke.setEndColor(new ColorRGBA(0f, 0f, 0f, 1f));
+
+        blackSmoke.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 200, 0));
+        blackSmoke.setStartSize(30f);
+        blackSmoke.setEndSize(70f);
+        blackSmoke.setGravity(0, 0, 0);
+        blackSmoke.setLowLife(1f);
+        blackSmoke.setHighLife(3f);
+        blackSmoke.getParticleInfluencer().setVelocityVariation(0.3f);
+        testSmoke = new SmokeControl(blackSmoke);
         NaturesNinja.addControl(testSmoke);
         NaturesNinja.getControl(SmokeControl.class).initSmoke();
+        
+        //set up the keybinds for manipulating the smoke livetime
+        inputManager.addMapping("Fire", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
         
         //ALWAYS THE LAST THING!  
         //Why: SimpleUpdate can be called durring this method.
@@ -687,13 +718,27 @@ public class Main extends SimpleApplication {
     }//method
     
     /*
-     * Related to SoundControl Supertest
+     * Related to Supertest
      */
     Node testnode;
     Spatial NaturesNinja;
     SoundControl testControl;
     AudioNode testAudio;
     SmokeControl testSmoke;
+    /*
+     * Defining the action of setting the spatial on fire
+     */
+    private ActionListener actionListener = new ActionListener() 
+    {
+    @Override
+        public void onAction(String name, boolean keyPressed, float tpf) 
+        {
+            if (name.equals("Fire") && !keyPressed) 
+            {
+                
+            }
+        }
+    };
     
 //------------------------------------------------------------------------------
     

@@ -7,6 +7,7 @@ package mygame;
 import com.jme3.asset.AssetManager;
 import com.jme3.effect.ParticleEmitter;
 import com.jme3.effect.ParticleMesh;
+import com.jme3.effect.shapes.EmitterShape;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
@@ -54,6 +55,12 @@ public class SmokeControl extends AbstractControl{
         indicator.setHighLife(3f);
         indicator.getParticleInfluencer().setVelocityVariation(0.3f);
     }
+    
+    //Constructor to allow a custom defined ParticleEmitter
+    public SmokeControl(ParticleEmitter emitter)
+    {
+        indicator = emitter;
+    }
 
     @Override
     protected void controlUpdate(float tpf) {
@@ -90,4 +97,77 @@ public class SmokeControl extends AbstractControl{
         }
     }
     
+    public void setEmitter(ParticleEmitter emitter)
+    {
+        indicator = emitter;
+    }
+    
+    //set the number of particles to be emitted
+    public void setParticleNum(int numParticles)
+    {
+        indicator.setNumParticles(numParticles);
+    }
+    
+    public void setEmissionRate(float particlesPerSec)
+    {
+        indicator.setParticlesPerSec(particlesPerSec);
+    }
+    
+    public void setSize(float startSize, float endSize)
+    {
+        indicator.setStartSize(startSize);
+        indicator.setEndSize(endSize);
+    }
+    
+    public void setColor(ColorRGBA startColor, ColorRGBA endColor)
+    {
+        indicator.setStartColor(startColor);
+        indicator.setEndColor(endColor);
+    }
+    
+    public void setDirAndVelocity(Vector3f initialVelocity)
+    {
+        indicator.getParticleInfluencer().setInitialVelocity(initialVelocity);
+    }
+    
+    public void setVelocityVariation(float variation)
+    {
+        indicator.getParticleInfluencer().setVelocityVariation(variation);
+    }
+    
+    public void setFacingVelocityDir(boolean bool)
+    {
+        indicator.setFacingVelocity(bool);
+    }
+    
+    public void setFacingNormal(Vector3f facing)
+    {
+        indicator.setFaceNormal(facing);
+    }
+    
+    public void setLifetime(float lowLife, float highLife)
+    {
+        indicator.setLowLife(lowLife);
+        indicator.setHighLife(highLife);
+    }
+    
+    public void setSpinning(float spinningSpeed)
+    {
+        indicator.setRotateSpeed(spinningSpeed);
+    }
+    
+    public void setRandomRotation(boolean bool)
+    {
+        indicator.setRandomAngle(bool);
+    }
+    
+    public void setGravity(Vector3f gravityVector)
+    {
+        indicator.setGravity(gravityVector);
+    }
+    
+    public void setEmitterShape(EmitterShape shape)
+    {
+        indicator.setShape(shape);
+    }
 }
