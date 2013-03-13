@@ -5,6 +5,7 @@
 package mygame;
 
 import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.control.CharacterControl;
 
 /**
  * Class to house all of the information necessary for level one and initialize
@@ -13,13 +14,29 @@ import com.jme3.bullet.BulletAppState;
  */
 public class Level1 {
     
-    private CameraController cameraControl;
-    private CameraPhysics cameraPhysics;
     private Terrain terrainForLevel;
-    private SunController sunControl;
+    private Main handleToMain;
     private BulletAppState physicsState;
     
+    public Level1(Main mainHandle, CharacterControl bodyForCamera)
+    {
+        handleToMain = mainHandle;
+        terrainForLevel = new Terrain(mainHandle);
+        terrainForLevel.load(handleToMain.getCamera());
+        handleToMain.getRootNode().attachChild(terrainForLevel.getTerrainNode());
+        
+        physicsState = new BulletAppState();
+        handleToMain.getStateManager().attach(physicsState);
+        physicsState.getPhysicsSpace().add(terrainForLevel.getTerrainQuad());
+        physicsState.getPhysicsSpace().add(terrainForLevel.getTerrainRigidBody());
+        physicsState.getPhysicsSpace().add(bodyForCamera);
+        physicsState.getPhysicsSpace().enableDebug(handleToMain.getAssetManager());
+    }
     
-    public Level1()
+//    public Terrain getTerrain()
+//    {
+//        return terrainForLevel;
+//    }
+    
     
 }

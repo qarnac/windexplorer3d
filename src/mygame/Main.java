@@ -68,7 +68,11 @@ public class Main extends SimpleApplication {
             private Vector3f tempVect;
     
     //Handles the terrain.
-    public Terrain terrainObj;
+    /*
+     * moving to Level1.java
+     * public Terrain terrainObj;
+     */
+    private Level1 firstLevel;
     
     //Handles basic lighting, only the sun right now.
     public SunController sunController;
@@ -90,7 +94,10 @@ public class Main extends SimpleApplication {
     //JME3 class.  Used for terrain
     //collision.  Could be used for more
     //in the future!
-    public BulletAppState physicsState;
+    /*
+     * moving to Level1.java
+     * public BulletAppState physicsState;
+     */
     
     //This is a manager for a 2D "scene" system.
     //You can display a series of images to the user
@@ -558,9 +565,13 @@ public class Main extends SimpleApplication {
         
 
         //TERRAIN AND SKY----------------
-        terrainObj = new Terrain(this);
-        terrainObj.load(getCamera());
-        rootNode.attachChild(terrainObj.getTerrainNode());
+        /*
+         * Moving to Level1.java
+         * terrainObj = new Terrain(this);
+         * terrainObj.load(getCamera());
+         * rootNode.attachChild(terrainObj.getTerrainNode());
+        */
+        firstLevel = new Level1(this, camController.getCameraPhysicsBody());
         
         //Sun----------------------------
         
@@ -585,12 +596,15 @@ public class Main extends SimpleApplication {
         //-------------------------------
         //Built in Physics Engine,
         //we use this for terrain collision detection.
+        /*
+         * Moved to Level1.java
         physicsState = new BulletAppState();
         stateManager.attach(physicsState);
-        physicsState.getPhysicsSpace().add(terrainObj.getTerrainQuad());
-        physicsState.getPhysicsSpace().add(terrainObj.getTerrainRigidBody());
+        physicsState.getPhysicsSpace().add(firstLevel.getTerrain().getTerrainQuad());
+        physicsState.getPhysicsSpace().add(firstLevel.getTerrain().getTerrainRigidBody());
         physicsState.getPhysicsSpace().add(camController.getCameraPhysicsBody());
         physicsState.getPhysicsSpace().enableDebug(assetManager);
+        */
         
         
         //-------------------------------
