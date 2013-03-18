@@ -75,7 +75,10 @@ public class Main extends SimpleApplication {
     private Level1 firstLevel;
     
     //Handles basic lighting, only the sun right now.
-    public SunController sunController;
+    /*
+     * Moved to Level1.java
+     * public SunController sunController;
+     */
 
     //Handles the cockpit image the user sees while
     //in a vehicle.  Also handles the HUD that displays
@@ -577,9 +580,14 @@ public class Main extends SimpleApplication {
         
         //We only use the sun for lighting some models, like the towns.
         //Other models, like the terrain, are not lit
-        sunController = new SunController(this);
-        sunController.loadSun();
-        sunController.setSunDirection(new Vector3f(-2f,-1f,2f).normalizeLocal());
+        /*
+         * moved to Level1.java
+         * 
+         * sunController = new SunController(this);
+         * sunController.loadSun();
+         * sunController.setSunDirection(new Vector3f(-2f,-1f,2f).normalizeLocal());
+         */
+        
         
         //-------------------------------
         
