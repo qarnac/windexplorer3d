@@ -20,10 +20,14 @@ public class Level1 {
     private BulletAppState physicsState;
     //Handles basic lighting, only the sun right now.
     private SunController sunController;
+    private CameraController camController;
     
-    public Level1(Main mainHandle, CharacterControl bodyForCamera)
+    public Level1(Main mainHandle)
     {
         handleToMain = mainHandle;
+        
+        camController = new CameraController(handleToMain);
+        
         terrainForLevel = new Terrain(mainHandle);
         terrainForLevel.load(handleToMain.getCamera());
         handleToMain.getRootNode().attachChild(terrainForLevel.getTerrainNode());
@@ -36,14 +40,14 @@ public class Level1 {
         handleToMain.getStateManager().attach(physicsState);
         physicsState.getPhysicsSpace().add(terrainForLevel.getTerrainQuad());
         physicsState.getPhysicsSpace().add(terrainForLevel.getTerrainRigidBody());
-        physicsState.getPhysicsSpace().add(bodyForCamera);
+        physicsState.getPhysicsSpace().add(camController.getCameraPhysicsBody());
         physicsState.getPhysicsSpace().enableDebug(handleToMain.getAssetManager());
     }
     
-//    public Terrain getTerrain()
-//    {
-//        return terrainForLevel;
-//    }
+    public CameraController getCameraControl()
+    {
+        return camController;
+    }
     
     
 }

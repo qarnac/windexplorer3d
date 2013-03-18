@@ -55,7 +55,11 @@ public class Main extends SimpleApplication {
     
     //Handles moving the camera around the game world.
     //Note: don't consider this an "physics engine" of any kind.
-    public CameraController camController;
+    /*
+     * moved to Level1.java
+     * 
+     * public CameraController camController;
+     */
     
         //This is a camera physics engine that outputs
         //new position vectors for the camera.  Pipe
@@ -308,7 +312,7 @@ public class Main extends SimpleApplication {
             //OLD WAY:
             //camController.moveCamera(camPhys.getMovementVector(), camPhys.getRotationY(), camPhys.getTiltX(), camPhys.getTiltZ());
             //NEW WAY(faster?  should test...):
-            camController.moveCamera(camPhys.getCameraControllerStruct());
+            firstLevel.getCameraControl().moveCamera(camPhys.getCameraControllerStruct());
             
             cockpitObj.update(tpf);
             
@@ -557,7 +561,12 @@ public class Main extends SimpleApplication {
         inputCont.mapInputs((short)0);
         
         //init camera--------------
-        camController = new CameraController(this);
+        /*
+         * moved to Level1.java
+         * 
+         * camController = new CameraController(this);
+         */
+        
         camPhys = new CameraPhysics(this);
         //change camera physics profile from default to helicopter.
         if(camPhys.setPhysicsProfile((short) 0) != 0){
@@ -574,7 +583,7 @@ public class Main extends SimpleApplication {
          * terrainObj.load(getCamera());
          * rootNode.attachChild(terrainObj.getTerrainNode());
         */
-        firstLevel = new Level1(this, camController.getCameraPhysicsBody());
+        firstLevel = new Level1(this);
         
         //Sun----------------------------
         
