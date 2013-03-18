@@ -44,9 +44,9 @@ public class Level1 {
         physicsState.getPhysicsSpace().enableDebug(handleToMain.getAssetManager());
     }
     
-    public CameraController getCameraControl()
+    public void moveCamera(DataCameraController dataCam)
     {
-        return camController;
+        camController.moveCamera(dataCam);
     }
     
     

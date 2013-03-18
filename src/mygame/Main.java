@@ -312,7 +312,12 @@ public class Main extends SimpleApplication {
             //OLD WAY:
             //camController.moveCamera(camPhys.getMovementVector(), camPhys.getRotationY(), camPhys.getTiltX(), camPhys.getTiltZ());
             //NEW WAY(faster?  should test...):
-            firstLevel.getCameraControl().moveCamera(camPhys.getCameraControllerStruct());
+            
+            /*
+             * moved the moveCamera call to cameraController into Level1 class as
+             * a method call.
+             */
+            firstLevel.moveCamera(camPhys.getCameraControllerStruct());
             
             cockpitObj.update(tpf);
             
