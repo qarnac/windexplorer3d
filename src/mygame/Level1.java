@@ -21,12 +21,16 @@ public class Level1 {
     //Handles basic lighting, only the sun right now.
     private SunController sunController;
     private CameraController camController;
+    private CameraPhysics camPhys;
     
     public Level1(Main mainHandle)
     {
         handleToMain = mainHandle;
         
         camController = new CameraController(handleToMain);
+        
+        camPhys = new CameraPhysics(mainHandle);
+        
         
         terrainForLevel = new Terrain(mainHandle);
         terrainForLevel.load(handleToMain.getCamera());
@@ -44,9 +48,15 @@ public class Level1 {
         physicsState.getPhysicsSpace().enableDebug(handleToMain.getAssetManager());
     }
     
-    public void moveCamera(DataCameraController dataCam)
+    public void moveCamera(float tpf, Vector3f tempVect)
     {
-        camController.moveCamera(dataCam);
+        camPhys.update(tpf, tempVect);
+        camController.moveCamera(camPhys.getCameraControllerStruct());
+    }
+    
+    public CameraPhysics getCameraPhys()
+    {
+        return camPhys;
     }
     
     

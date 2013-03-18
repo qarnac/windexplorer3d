@@ -20,14 +20,19 @@ public class InputController implements AnalogListener, ActionListener{
     private Main mainHandle;
     private InputManager IM;
     private short mappingID;
+    private Level1 level;
     
     public final short HELICOPTER_MAP_ID = 0;
     
     //--------------------------------------------------------------------------
     
-    public InputController(Main mainHandle){
+    /*
+     * added Level1 to constructor to allow refactor to work
+     */
+    public InputController(Main mainHandle, Level1 level1){
         this.mainHandle = mainHandle;
         IM = mainHandle.getInputManager();
+        level = level1;
     }
     
     //--------------------------------------------------------------------------
@@ -79,46 +84,90 @@ public class InputController implements AnalogListener, ActionListener{
             //------------------------------
             //FORWARD
             if (name.equals("Wkey")) {
+                /*
+                 * changed so refactoring using level1 does not break this
+                 * 
+                 * if(isPressed)
+                 *     mainHandle.camPhys.setUserInputZ(1);
+                 * else
+                 *     mainHandle.camPhys.setUserInputZ(0);
+                 */
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputZ(1);
+                    level.getCameraPhys().setUserInputZ(1);
                 else
-                    mainHandle.camPhys.setUserInputZ(0);
+                    level.getCameraPhys().setUserInputZ(0);
+                
             }
 
             //BACKWARD
             if (name.equals("Skey")) {
+                /*
+                 * changed so refactoring using level1 does not break this
+                 * 
+                 * if(isPressed)
+                 *     mainHandle.camPhys.setUserInputZ(-1);
+                 * else
+                 *     mainHandle.camPhys.setUserInputZ(0);
+                 */
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputZ(-1);
+                    level.getCameraPhys().setUserInputZ(-1);
                 else
-                    mainHandle.camPhys.setUserInputZ(0);
+                    level.getCameraPhys().setUserInputZ(0);
             }
 
             //LEFT
             if (name.equals("Akey")) {
+                /*
+                 * changed so refactoring using level1 does not break this
+                 * 
+                 * if(isPressed)
+                 *     mainHandle.camPhys.setUserInputX(1);
+                 * else
+                 *     mainHandle.camPhys.setUserInputX(0);
+                 */
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputX(1);
+                    level.getCameraPhys().setUserInputX(1);
                 else
-                    mainHandle.camPhys.setUserInputX(0);
+                    level.getCameraPhys().setUserInputX(0);
+                
             }
 
             //RIGHT
             if (name.equals("Dkey")) {
+                /*
+                 * changed so refactoring using level1 does not break this
+                 * 
+                 * if(isPressed)
+                 *     mainHandle.camPhys.setUserInputX(-1);
+                 * else
+                 *     mainHandle.camPhys.setUserInputX(0);
+                 */
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputX(-1);
+                    level.getCameraPhys().setUserInputX(-1);
                 else
-                    mainHandle.camPhys.setUserInputX(0);
+                    level.getCameraPhys().setUserInputX(0);
             }
 
             //UP
             if (name.equals("Pkey")) {
                 if(isPressed){
-                    mainHandle.camPhys.setUserInputY(1);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputY(1);
+                     */
+                    level.getCameraPhys().setUserInputY(1);
                     mainHandle.soundsManager.setVolume(
                             mainHandle.soundsManager.HELI_BLADES_INDEX, 
                             mainHandle.soundsManager.HELI_BLADES_HIGH_VOLUME);
                 }//if
                 else{
-                    mainHandle.camPhys.setUserInputY(0);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputY(0);
+                     */
+                    level.getCameraPhys().setUserInputY(0);
                     mainHandle.soundsManager.setVolume(
                             mainHandle.soundsManager.HELI_BLADES_INDEX, 
                             mainHandle.soundsManager.HELI_BLADES_DEFAULT_VOLUME);
@@ -128,25 +177,55 @@ public class InputController implements AnalogListener, ActionListener{
             //DOWN
             if (name.equals("Lkey")) {
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputY(-1);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputY(-1);
+                     */
+                    level.getCameraPhys().setUserInputY(-1);
                 else
-                    mainHandle.camPhys.setUserInputY(0);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputY(0);
+                     */
+                    level.getCameraPhys().setUserInputY(0);
             }//if
 
             //ROTATE LEFT
             if (name.equals("Qkey")) {
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputRotationLeftAroundY(1);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputRotationLeftAroundY(1);
+                     */
+                    level.getCameraPhys().setUserInputRotationLeftAroundY(1);
                 else
-                    mainHandle.camPhys.setUserInputRotationLeftAroundY(0);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputRotationLeftAroundY(0);
+                     */
+                    level.getCameraPhys().setUserInputRotationLeftAroundY(0);
             }//if
 
             //ROTATE RIGHT
             if (name.equals("Ekey")) {
                 if(isPressed)
-                    mainHandle.camPhys.setUserInputRotationRightAroundY(1);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputRotationRightAroundY(1);
+                     */
+                    level.getCameraPhys().setUserInputRotationRightAroundY(1);
                 else
-                    mainHandle.camPhys.setUserInputRotationRightAroundY(0);
+                    /*
+                     * changed so refactoring using level1 does not break this
+                     * 
+                     * mainHandle.camPhys.setUserInputRotationRightAroundY(0);
+                     */
+                    level.getCameraPhys().setUserInputRotationRightAroundY(0);
             }//if
 
             //LAND

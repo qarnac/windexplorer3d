@@ -64,7 +64,12 @@ public class Main extends SimpleApplication {
         //This is a camera physics engine that outputs
         //new position vectors for the camera.  Pipe
         //these outputs into the camera controller.
-        public CameraPhysics camPhys;
+    /*
+     * Moved to Level1.java
+     * 
+     * public CameraPhysics camPhys;
+     */
+        
         
             //band-aid to a problem.
             //used to strip off y-axis from vector from cam phys.
@@ -306,18 +311,23 @@ public class Main extends SimpleApplication {
             tempVect.y = 0;
             //The physics engine doesnt do anything other than generate some
             //internal numbers based on its algorithms.
-            camPhys.update(tpf, tempVect);
+            /*
+             * moved into the Level1 class as part of the moveCamera method.
+             * 
+             * camPhys.update(tpf, tempVect);
+             */
+            
             //put the numbers generated from the physics engine into the
             //object that moves the camera.
             //OLD WAY:
             //camController.moveCamera(camPhys.getMovementVector(), camPhys.getRotationY(), camPhys.getTiltX(), camPhys.getTiltZ());
-            //NEW WAY(faster?  should test...):
-            
+            //NEW WAY(faster?  should test...):   
             /*
-             * moved the moveCamera call to cameraController into Level1 class as
-             * a method call.
+             * moved the into the Level1 class as a method call
+             * 
+             * camController.moveCamera(camPhys.getCameraControllerStruct());
              */
-            firstLevel.moveCamera(camPhys.getCameraControllerStruct());
+            firstLevel.moveCamera(tpf, tempVect);
             
             cockpitObj.update(tpf);
             
@@ -560,8 +570,12 @@ public class Main extends SimpleApplication {
     
     //Will start the first level
     public void startLevel1(){  
+        /*
+         * New level1 class to begin refactoring this method into
+         */
+        firstLevel = new Level1(this);
         //Controls user input
-        inputCont = new InputController(this);
+        inputCont = new InputController(this, firstLevel);
         //map the input to the first profile in the config file.
         inputCont.mapInputs((short)0);
         
@@ -572,13 +586,18 @@ public class Main extends SimpleApplication {
          * camController = new CameraController(this);
          */
         
-        camPhys = new CameraPhysics(this);
-        //change camera physics profile from default to helicopter.
-        if(camPhys.setPhysicsProfile((short) 0) != 0){
-            startMainMenu("An internal error has occured.");
-            gamePlaying = false;
-            return;
-        }//if
+        
+        /*
+         * moved to Level1.java
+         * 
+         * //change camera physics profile from default to helicopter.
+         * if(camPhys.setPhysicsProfile((short) 0) != 0){
+         *   startMainMenu("An internal error has occured.");
+         *   gamePlaying = false;
+         *   return;
+         * }//if
+         */
+        
         
 
         //TERRAIN AND SKY----------------
@@ -588,7 +607,6 @@ public class Main extends SimpleApplication {
          * terrainObj.load(getCamera());
          * rootNode.attachChild(terrainObj.getTerrainNode());
         */
-        firstLevel = new Level1(this);
         
         //Sun----------------------------
         
