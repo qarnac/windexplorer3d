@@ -96,16 +96,16 @@ public class Main extends SimpleApplication {
     //Handles the cockpit image the user sees while
     //in a vehicle.  Also handles the HUD that displays
     //text for the user.
-    public Cockpit cockpitObj;
+    private Cockpit cockpitObj;
     
         //basic timer, currently being
         //piped into the cockpit's HUD manager.
-        public LevelTimer levelTimer;
+        private LevelTimer levelTimer;
     
     //Is the 3D game playing?
     //Used to turn off the main update loop
     //while the menu or intro is going.
-    public boolean gamePlaying;
+    private boolean gamePlaying;
     
     //JME3 class.  Used for terrain
     //collision.  Could be used for more
@@ -118,9 +118,13 @@ public class Main extends SimpleApplication {
     //This is a manager for a 2D "scene" system.
     //You can display a series of images to the user
     //to show a back story or whatever.
-    public SceneManager sceneManager;
+    private SceneManager sceneManager;
     
     //For playing sounds.
+    /*
+     * Sounds manager is accessed as a public data member by InputController,
+     * MainMenu, and MainMenuController
+     */
     public SoundsManager soundsManager;
     
     //Uses config file to define area's the user could check
