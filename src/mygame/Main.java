@@ -47,11 +47,15 @@ public class Main extends SimpleApplication {
     
     //reads in a .txt file full of configurations
     //used to define different aspects of the game.
+    /*
+     * this is accessed as a public member of Main in SceneManager, CameraPhysics,
+     * and terrain.
+     */
     public ConfigReader confReader;
     
     //interfaces with the built in InputManager to
     //bring the user's input into the game engine.
-    public InputController inputCont;
+    private InputController inputCont;
     
     //Handles moving the camera around the game world.
     //Note: don't consider this an "physics engine" of any kind.
