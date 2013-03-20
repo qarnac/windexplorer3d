@@ -43,7 +43,7 @@ public class Main extends SimpleApplication {
     //--------------------------------------------------------------------------
     
     //handles the main menu
-    public MainMenu mainMenu;
+    private MainMenu mainMenu;
     
     //reads in a .txt file full of configurations
     //used to define different aspects of the game.
@@ -668,7 +668,9 @@ public class Main extends SimpleApplication {
         cockpitObj.setTimerToShow(true);
         levelTimer.setTimerRunning(true);
         
-        
+        /*
+         * moved to Level1.java
+         */
         windFarmPlacementChecker.loadShapes((short)0);
         windFarmPlacementChecker.loadSmokeOnAllObjects();
         
