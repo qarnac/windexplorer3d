@@ -575,7 +575,7 @@ public class Main extends SimpleApplication {
          */
         firstLevel = new Level1(this);
         //Controls user input
-        inputCont = new InputController(this, firstLevel);
+        inputCont = new InputController(this, firstLevel.getCameraPhys());
         //map the input to the first profile in the config file.
         inputCont.mapInputs((short)0);
         

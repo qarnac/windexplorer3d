@@ -20,7 +20,7 @@ public class InputController implements AnalogListener, ActionListener{
     private Main mainHandle;
     private InputManager IM;
     private short mappingID;
-    private Level1 level;
+    private CameraPhysics cameraPhys;
     
     public final short HELICOPTER_MAP_ID = 0;
     
@@ -29,10 +29,10 @@ public class InputController implements AnalogListener, ActionListener{
     /*
      * added Level1 to constructor to allow refactor to work
      */
-    public InputController(Main mainHandle, Level1 level1){
+    public InputController(Main mainHandle, CameraPhysics level1CamPhys){
         this.mainHandle = mainHandle;
         IM = mainHandle.getInputManager();
-        level = level1;
+        cameraPhys = level1CamPhys;
     }
     
     //--------------------------------------------------------------------------
@@ -93,9 +93,9 @@ public class InputController implements AnalogListener, ActionListener{
                  *     mainHandle.camPhys.setUserInputZ(0);
                  */
                 if(isPressed)
-                    level.getCameraPhys().setUserInputZ(1);
+                    cameraPhys.setUserInputZ(1);
                 else
-                    level.getCameraPhys().setUserInputZ(0);
+                    cameraPhys.setUserInputZ(0);
                 
             }
 
@@ -110,9 +110,9 @@ public class InputController implements AnalogListener, ActionListener{
                  *     mainHandle.camPhys.setUserInputZ(0);
                  */
                 if(isPressed)
-                    level.getCameraPhys().setUserInputZ(-1);
+                    cameraPhys.setUserInputZ(-1);
                 else
-                    level.getCameraPhys().setUserInputZ(0);
+                    cameraPhys.setUserInputZ(0);
             }
 
             //LEFT
@@ -126,9 +126,9 @@ public class InputController implements AnalogListener, ActionListener{
                  *     mainHandle.camPhys.setUserInputX(0);
                  */
                 if(isPressed)
-                    level.getCameraPhys().setUserInputX(1);
+                    cameraPhys.setUserInputX(1);
                 else
-                    level.getCameraPhys().setUserInputX(0);
+                    cameraPhys.setUserInputX(0);
                 
             }
 
@@ -143,9 +143,9 @@ public class InputController implements AnalogListener, ActionListener{
                  *     mainHandle.camPhys.setUserInputX(0);
                  */
                 if(isPressed)
-                    level.getCameraPhys().setUserInputX(-1);
+                    cameraPhys.setUserInputX(-1);
                 else
-                    level.getCameraPhys().setUserInputX(0);
+                    cameraPhys.setUserInputX(0);
             }
 
             //UP
@@ -156,7 +156,7 @@ public class InputController implements AnalogListener, ActionListener{
                      * 
                      * mainHandle.camPhys.setUserInputY(1);
                      */
-                    level.getCameraPhys().setUserInputY(1);
+                    cameraPhys.setUserInputY(1);
                     mainHandle.soundsManager.setVolume(
                             mainHandle.soundsManager.HELI_BLADES_INDEX, 
                             mainHandle.soundsManager.HELI_BLADES_HIGH_VOLUME);
@@ -167,7 +167,7 @@ public class InputController implements AnalogListener, ActionListener{
                      * 
                      * mainHandle.camPhys.setUserInputY(0);
                      */
-                    level.getCameraPhys().setUserInputY(0);
+                    cameraPhys.setUserInputY(0);
                     mainHandle.soundsManager.setVolume(
                             mainHandle.soundsManager.HELI_BLADES_INDEX, 
                             mainHandle.soundsManager.HELI_BLADES_DEFAULT_VOLUME);
@@ -182,14 +182,14 @@ public class InputController implements AnalogListener, ActionListener{
                      * 
                      * mainHandle.camPhys.setUserInputY(-1);
                      */
-                    level.getCameraPhys().setUserInputY(-1);
+                    cameraPhys.setUserInputY(-1);
                 else
                     /*
                      * changed so refactoring using level1 does not break this
                      * 
                      * mainHandle.camPhys.setUserInputY(0);
                      */
-                    level.getCameraPhys().setUserInputY(0);
+                    cameraPhys.setUserInputY(0);
             }//if
 
             //ROTATE LEFT
@@ -200,14 +200,14 @@ public class InputController implements AnalogListener, ActionListener{
                      * 
                      * mainHandle.camPhys.setUserInputRotationLeftAroundY(1);
                      */
-                    level.getCameraPhys().setUserInputRotationLeftAroundY(1);
+                    cameraPhys.setUserInputRotationLeftAroundY(1);
                 else
                     /*
                      * changed so refactoring using level1 does not break this
                      * 
                      * mainHandle.camPhys.setUserInputRotationLeftAroundY(0);
                      */
-                    level.getCameraPhys().setUserInputRotationLeftAroundY(0);
+                    cameraPhys.setUserInputRotationLeftAroundY(0);
             }//if
 
             //ROTATE RIGHT
@@ -218,14 +218,14 @@ public class InputController implements AnalogListener, ActionListener{
                      * 
                      * mainHandle.camPhys.setUserInputRotationRightAroundY(1);
                      */
-                    level.getCameraPhys().setUserInputRotationRightAroundY(1);
+                    cameraPhys.setUserInputRotationRightAroundY(1);
                 else
                     /*
                      * changed so refactoring using level1 does not break this
                      * 
                      * mainHandle.camPhys.setUserInputRotationRightAroundY(0);
                      */
-                    level.getCameraPhys().setUserInputRotationRightAroundY(0);
+                    cameraPhys.setUserInputRotationRightAroundY(0);
             }//if
 
             //LAND
