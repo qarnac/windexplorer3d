@@ -144,20 +144,20 @@ public class Main extends SimpleApplication {
     private ModelsTowns townsManager;
     
     //the level the user is on.
-    public short currentLevel;
+    private short currentLevel;
     
     //Holds general data for level one,
     //such as the game time, etc.
-    public final DataLevelOneGeneral dataLevel1General = new DataLevelOneGeneral();
+    private final DataLevelOneGeneral dataLevel1General = new DataLevelOneGeneral();
     
     //--------------------------------------------------------------------------
     
     //This is slowly replacing the debug flags below...
     private DebugGlobals DEBUG_GLOBALS_OBJ = new DebugGlobals();
     
-    public final boolean DEBUG_INTRO_OFF = true;
+    private final boolean DEBUG_INTRO_OFF = true;
     public final boolean DEBUG_OUTPUT_CAM_POSITION = false;
-    public final boolean DEBUG_SHOW_COCKPIT = true;
+    private final boolean DEBUG_SHOW_COCKPIT = true;
 
     
     //--------------------------------------------------------------------------
