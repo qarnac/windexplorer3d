@@ -129,7 +129,7 @@ public class Main extends SimpleApplication {
     
     //Uses config file to define area's the user could check
     //to build a wind farm.
-    public WindFarmPlacementChecker windFarmPlacementChecker;
+    private WindFarmPlacementChecker windFarmPlacementChecker;
     
         //a hit was detected
         public boolean placementRaycastHit;
@@ -141,7 +141,7 @@ public class Main extends SimpleApplication {
         
     //displays a town (and clones of said town)
     //all around the map.
-    public ModelsTowns townsManager;
+    private ModelsTowns townsManager;
     
     //the level the user is on.
     public short currentLevel;
