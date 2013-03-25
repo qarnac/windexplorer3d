@@ -7,6 +7,11 @@ package mygame;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.math.Vector3f;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class to house all of the information necessary for level one and initialize
@@ -22,6 +27,15 @@ public class Level1 {
     private SunController sunController;
     private CameraController camController;
     private CameraPhysics camPhys;
+    
+    //Reading stuff for loadCameraConfig() function
+    private BufferedReader bufferedIn;
+    private String line;
+    //Camera config vars
+    private short numberOfProfiles;
+    private DataCameraPhysics[] _CamVars;
+    
+    
     
     public Level1(Main mainHandle)
     {
@@ -59,5 +73,67 @@ public class Level1 {
         return camPhys;
     }
     
+    public byte loadCameraFile(String configPath){
+        //config file not found
+        if (configPath == null){
+            return 1;
+        }//if    
+            //inputStream =  new FileInputStream(configFolderPath + cameraConfigName);
+            //bufferedIn = new BufferedReader(new InputStreamReader(inputStream));
+            bufferedIn = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(configPath)));
+            try {
+                getNextValidLine();
+                numberOfProfiles = Short.valueOf(line);
+                _CamVars = new DataCameraPhysics[numberOfProfiles];
+                System.out.println("Camera Config Reader: numberOfProfiles: " + numberOfProfiles);
+                for(short i = 0; i < numberOfProfiles; ++i ){
+                    _CamVars[i] = new DataCameraPhysics();
+                    
+                    getNextValidLine();
+                    _CamVars[i].maxVelocity = Float.valueOf(line); 
+                    getNextValidLine();
+                    _CamVars[i].impulseXZ = Integer.valueOf(line);                   
+                    getNextValidLine();
+                    _CamVars[i].impulseY = Integer.valueOf(line);                 
+                    getNextValidLine();
+                    _CamVars[i].frictionX = Float.valueOf(line);               
+                    getNextValidLine();
+                    _CamVars[i].frictionY = Float.valueOf(line);               
+                    getNextValidLine();
+                    _CamVars[i].frictionZ = Float.valueOf(line);               
+                    getNextValidLine();
+                    _CamVars[i].frictionYRotation = Float.valueOf(line);      
+                    getNextValidLine();
+                    _CamVars[i].rotationYImpulse = Float.valueOf(line);    
+                    getNextValidLine();
+                    _CamVars[i].rotationYVelocityMax = Float.valueOf(line);    
+                    getNextValidLine();
+                    _CamVars[i].mass = Integer.valueOf(line);
+                }//for
+                
+            } //try
+            catch (IOException ex) {
+                Logger.getLogger(ConfigReader.class.getName()).log(Level.SEVERE, null, ex);
+                return 1;
+            }
+        
+        return 0;
+    }
+    
+    private void getNextValidLine() throws IOException{
+        line = bufferedIn.readLine();
+        
+        //reject empty lines, spaces or comments.
+        while(line.equalsIgnoreCase("") || line.startsWith("//") || line.equalsIgnoreCase(" ") || line == null){
+            line = bufferedIn.readLine().trim();
+        }//while
+        
+        //System.out.println("LINE: " + line);
+        while(line.endsWith("++")){
+            line = line.replace("++", "");
+            line += "\n" + bufferedIn.readLine();
+        }
+        
+    }//method
     
 }

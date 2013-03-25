@@ -247,6 +247,9 @@ public class Main extends SimpleApplication {
             return;
         }//if
         
+        /*
+         * moving to level1.java
+         */
         if(confReader.loadCameraFile() != 0){
             startMainMenu("camera config not found");
             return;
@@ -712,7 +715,7 @@ public class Main extends SimpleApplication {
         
         
         //ALWAYS THE LAST THING!  
-        //Why: SimpleUpdate can be called durring this method.
+        //Why: SimpleUpdate can be called during this method.
         gamePlaying = true;
     }//method
     

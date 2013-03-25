@@ -24,6 +24,9 @@ public class ConfigReader {
     
     //Reading Vars
     //private InputStream inputStream;
+    /*
+     * moving to level1.java
+     */
     private BufferedReader bufferedIn;
     private String line;
     
@@ -47,8 +50,11 @@ public class ConfigReader {
     private String terrainRoadTexPath;
     
     //Camera Vars---------------
-    private short numberOfProfiles;
-    private DataCameraPhysics[] _CamVars;
+    /*
+     * moving to level1.java
+     * private short numberOfProfiles;
+     * private DataCameraPhysics[] _CamVars;
+     */
     
     //intro screen vars---------
     private int numberOfScenes;
@@ -164,7 +170,9 @@ public class ConfigReader {
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
     //--------------------------------------------------------------------------
-
+    /*
+     * moving into level1.java
+     *
     public byte loadCameraFile(){
         //config file not found
         if (cameraConfigFileName == null){
@@ -211,7 +219,7 @@ public class ConfigReader {
         
         return 0;
     }
-    
+    */
     
     
     //--------------------------------------------------------------------------
@@ -421,12 +429,16 @@ public class ConfigReader {
         return PlacementRejectionFileName;
     }
     
+    /*
+     * moving to level1.java
+     *
     public DataCameraPhysics getCameraVars(short index){
         if(index >= numberOfProfiles){
             return null;
         }
         return _CamVars[index];
     }
+    */
     
     public DataScene getIntroSceneData(short index){
         return _introScene[index];
@@ -443,7 +455,9 @@ public class ConfigReader {
     //--------------------------------------------------------------------------
     //INTERNAL TOOLS------------------------------------------------------------
     //--------------------------------------------------------------------------
-    
+    /*
+     * Moving to level1.java
+     */
     private void getNextValidLine() throws IOException{
         line = bufferedIn.readLine();
         
